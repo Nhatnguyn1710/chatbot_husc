@@ -1,4 +1,4 @@
-"""Intent Classifier Module for HUSC Chatbot"""
+
 
 import re
 import random
@@ -129,3 +129,4 @@ def get_classifier() -> IntentClassifier:
 
 def classify_intent(query: str) -> IntentResult:
     return get_classifier().classify(query)
+
