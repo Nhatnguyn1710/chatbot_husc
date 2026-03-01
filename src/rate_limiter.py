@@ -1,17 +1,3 @@
-"""
-🚦 RATE LIMITER MODULE
-======================
-Module giới hạn tần suất requests để ngăn chặn abuse.
-
-Features:
-- Multi-tier rate limits (per minute/hour/day)
-- IP-based và User-based limiting
-- Sliding window algorithm
-- Whitelist/Blacklist support
-- Auto-block abuse patterns
-- Statistics & monitoring
-
-"""
 
 import os
 import time
@@ -22,11 +8,6 @@ from typing import Optional, Dict, Any, Tuple, List, Set
 from datetime import datetime, timedelta
 import json
 import hashlib
-
-
-# ==============================================================================
-# CONFIGURATION
-# ==============================================================================
 
 @dataclass
 class RateLimitConfig:
@@ -773,7 +754,7 @@ def rate_limit_decorator(
 # ==============================================================================
 
 if __name__ == "__main__":
-    print("\n🚦 Rate Limiter - Test Mode")
+    print("\n Rate Limiter - Test Mode")
     print("=" * 50)
     
     # Test basic functionality
@@ -784,8 +765,8 @@ if __name__ == "__main__":
     
     test_ip = "192.168.1.100"
     
-    print(f"\n📊 Config: {limiter.config.requests_per_minute} req/min, burst={limiter.config.burst_limit}")
-    print(f"\n🔄 Testing {test_ip}:")
+    print(f"\n Config: {limiter.config.requests_per_minute} req/min, burst={limiter.config.burst_limit}")
+    print(f"\n Testing {test_ip}:")
     
     # Send multiple requests
     for i in range(10):
@@ -794,16 +775,17 @@ if __name__ == "__main__":
         print(f"   Request {i+1}: {status} {result.message} (remaining: {result.remaining})")
         time.sleep(0.1)
     
-    print(f"\n📈 Statistics:")
+    print(f"\n Statistics:")
     stats = limiter.get_statistics()
     print(f"   Total: {stats['total_requests']}")
     print(f"   Allowed: {stats['allowed_requests']}")
     print(f"   Rate limited: {stats['rate_limited_requests']}")
     
-    print(f"\n🔍 IP Status:")
+    print(f"\n IP Status:")
     ip_status = limiter.get_ip_status(test_ip)
     print(f"   Minute count: {ip_status['current_counts']['minute']}")
     
     # Cleanup
     limiter.shutdown()
     print("\n✅ Test completed!")
+
