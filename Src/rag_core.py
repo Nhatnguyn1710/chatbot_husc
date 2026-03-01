@@ -132,9 +132,9 @@ class RAGConfig:
     rerank_top_k: int = field(default_factory=lambda: int(os.getenv("RERANK_TOP_K") or "5"))
     
     # Chunking settings
-    chunk_max_tokens: int = 1024  # PDF chunk size (structure-aware)
-    csv_chunk_max_tokens: int = 256  # CSV chunk size (nhỏ hơn để tránh nhiễu)
-    chunk_overlap_tokens: int = 100 # Giảm 200 -> 100 (giảm chunks trùng lặp, DB nhỏ hơn)
+    chunk_max_tokens: int = 1024 
+    csv_chunk_max_tokens: int = 256 
+    chunk_overlap_tokens: int = 100 
     
     # Document names (để phân biệt nguồn, giảm ảo giác trích dẫn)
     pdf_document_name: str = field(default_factory=lambda: os.getenv("PDF_DOCUMENT_NAME", "Quy chế đào tạo"))
