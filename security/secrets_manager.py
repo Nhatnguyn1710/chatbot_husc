@@ -1,14 +1,10 @@
 """
-🔐 SECRETS MANAGER MODULE
-==========================
 Module quản lý bảo mật API keys cho HUSC RAG Chatbot.
-
 Features:
 - Mã hóa AES-256 cho API keys
 - Validate format API keys tự động
 
 """
-
 import os
 import re
 import base64
@@ -20,9 +16,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from functools import lru_cache
 
-# ==============================================================================
-# OPTIONAL: Cryptography for AES encryption
-# ==============================================================================
+
 try:
     from cryptography.fernet import Fernet
     from cryptography.hazmat.primitives import hashes
@@ -67,17 +61,6 @@ class SecretsConfig:
 # ==============================================================================
 
 class SecretsManager:
-    """
-    Quản lý secrets và API keys một cách bảo mật.
-    
-    Usage:
-        secrets = SecretsManager()
-        api_key = secrets.get_gemini_key()
-        
-        # Validate key
-        if secrets.validate_gemini_key(api_key):
-            print("Key is valid!")
-    """
     
     _instance: Optional["SecretsManager"] = None
     _lock = None
@@ -158,18 +141,7 @@ class SecretsManager:
     # ==========================================================================
     
     def get_gemini_key(self, validate: bool = True) -> str:
-        """
-        Lấy Gemini API key.
-        
-        Args:
-            validate: Có validate format key không (default: True)
-        
-        Returns:
-            API key string
-            
-        Raises:
-            ValueError: Nếu key không hợp lệ hoặc không tìm thấy
-        """
+
         # Try encrypted storage first
         if self.config.encryption_enabled and self._fernet:
             key = self._get_encrypted_secret("GEMINI_API_KEY")
@@ -189,16 +161,7 @@ class SecretsManager:
         return key
     
     def get_secret(self, key_name: str, default: Optional[str] = None) -> Optional[str]:
-        """
-        Lấy secret theo tên.
         
-        Args:
-            key_name: Tên của secret
-            default: Giá trị mặc định nếu không tìm thấy
-            
-        Returns:
-            Secret value hoặc default
-        """
         # Try encrypted storage first
         if self.config.encryption_enabled and self._fernet:
             value = self._get_encrypted_secret(key_name)
@@ -237,15 +200,7 @@ class SecretsManager:
     # ==========================================================================
     
     def validate_gemini_key(self, api_key: str) -> bool:
-        """
-        Validate Gemini API key format.
-        
-        Args:
-            api_key: API key to validate
-            
-        Returns:
-            True nếu format hợp lệ
-        """
+
         if not api_key:
             return False
         
@@ -260,12 +215,7 @@ class SecretsManager:
         return True
     
     def validate_all_keys(self) -> Dict[str, bool]:
-        """
-        Validate tất cả API keys.
-        
-        Returns:
-            Dict với key name và validation status
-        """
+
         results = {}
         
         # Validate Gemini key
@@ -282,15 +232,7 @@ class SecretsManager:
     # ==========================================================================
     
     def encrypt_and_store(self, secrets_dict: Dict[str, str]) -> bool:
-        """
-        Encrypt và lưu secrets vào file.
-        
-        Args:
-            secrets_dict: Dict chứa secrets cần lưu
-            
-        Returns:
-            True nếu thành công
-        """
+
         if not CRYPTO_AVAILABLE:
             print("❌ Cryptography library not installed")
             return False
@@ -330,12 +272,7 @@ class SecretsManager:
             return False
     
     def decrypt_secrets(self) -> Optional[Dict[str, str]]:
-        """
-        Decrypt và đọc tất cả secrets.
-        
-        Returns:
-            Dict chứa secrets hoặc None
-        """
+
         if not self._fernet:
             return None
             
@@ -362,43 +299,18 @@ class SecretsManager:
     # ==========================================================================
     
     def mask_key(self, key: str, visible_chars: int = 8) -> str:
-        """
-        Mask API key để hiển thị an toàn.
-        
-        Args:
-            key: API key cần mask
-            visible_chars: Số ký tự hiển thị ở đầu và cuối
-            
-        Returns:
-            Masked key string
-        """
+
         if not key or len(key) <= visible_chars * 2:
             return "****"
         
         return f"{key[:visible_chars]}...{key[-visible_chars:]}"
     
     def generate_secure_token(self, length: int = 32) -> str:
-        """
-        Generate secure random token.
-        
-        Args:
-            length: Độ dài token (bytes)
-            
-        Returns:
-            Secure token string (base64 encoded)
-        """
+
         return secrets.token_urlsafe(length)
     
     def hash_for_comparison(self, value: str) -> str:
-        """
-        Hash value để so sánh an toàn.
-        
-        Args:
-            value: String cần hash
-            
-        Returns:
-            SHA256 hash
-        """
+   
         return hashlib.sha256(value.encode()).hexdigest()
     
     # ==========================================================================
@@ -436,12 +348,7 @@ class SecretsManager:
     # ==========================================================================
     
     def check_key_age(self) -> Dict[str, Any]:
-        """
-        Check age of stored keys.
-        
-        Returns:
-            Dict với key age information
-        """
+
         result = {
             "needs_rotation": False,
             "keys": {}
@@ -477,15 +384,7 @@ _secrets_manager: Optional[SecretsManager] = None
 
 
 def get_secrets_manager(config: Optional[SecretsConfig] = None) -> SecretsManager:
-    """
-    Get Secrets Manager singleton instance.
-    
-    Args:
-        config: Optional configuration
-        
-    Returns:
-        SecretsManager instance
-    """
+
     global _secrets_manager
     
     if _secrets_manager is None:
@@ -506,11 +405,8 @@ def reset_secrets_manager() -> None:
 # ==============================================================================
 
 def setup_initial_secrets() -> None:
-    """
-    Interactive setup for initial secrets.
-    Chạy: python secrets_manager.py setup
-    """
-    print("\n🔐 HUSC RAG Chatbot - Secrets Setup")
+   
+    print("\n HUSC RAG Chatbot - Secrets Setup")
     print("=" * 50)
     
     # Get Gemini API key
@@ -573,7 +469,7 @@ if __name__ == "__main__":
         setup_initial_secrets()
     else:
         # Test mode
-        print("\n🔐 Secrets Manager - Test Mode")
+        print("\n Secrets Manager - Test Mode")
         print("=" * 50)
         
         secrets = get_secrets_manager()
@@ -583,10 +479,11 @@ if __name__ == "__main__":
         for k, v in info.items():
             print(f"   {k}: {v}")
         
-        print("\n🔑 Key Validation:")
+        print("\n Key Validation:")
         validation = secrets.validate_all_keys()
         for k, v in validation.items():
             status = "✅" if v else "❌"
             print(f"   {k}: {status}")
         
         print("\n   Chạy 'python secrets_manager.py setup' để cấu hình secrets")
+
