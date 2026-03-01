@@ -132,9 +132,9 @@ class RAGConfig:
     rerank_top_k: int = field(default_factory=lambda: int(os.getenv("RERANK_TOP_K") or "5"))
     
     # Chunking settings
-    chunk_max_tokens: int = 1024  # PDF chunk size (structure-aware)
-    csv_chunk_max_tokens: int = 256  # CSV chunk size (nhỏ hơn để tránh nhiễu)
-    chunk_overlap_tokens: int = 100 # Giảm 200 -> 100 (giảm chunks trùng lặp, DB nhỏ hơn)
+    chunk_max_tokens: int = 1024  
+    csv_chunk_max_tokens: int = 256  
+    chunk_overlap_tokens: int = 100 
     
     # Document names (để phân biệt nguồn, giảm ảo giác trích dẫn)
     pdf_document_name: str = field(default_factory=lambda: os.getenv("PDF_DOCUMENT_NAME", "Quy chế đào tạo"))
@@ -199,15 +199,7 @@ def preprocess_text(text: str) -> str:
 
 
 def preprocess_legal_text(text: str) -> str:
-    """
-    Tiền xử lý chuyên biệt cho văn bản pháp lý (PDF quy chế).
-    
-    Khác với preprocess_text():
-    - GIỮ NGUYÊN ký tự xuống dòng (\n) để bảo toàn cấu trúc Chương/Điều/Khoản
-    - Chỉ gộp space/tab, KHÔNG gộp newline
-    - Xóa số trang rác từ PDF
-    - Thêm boundary rõ ràng trước Chương, Điều, Mục
-    """
+
     text = unicodedata.normalize("NFC", text or "")
     text = text.replace("\ufeff", "").replace("\u200b", "").replace("\u00ad", "")
     
@@ -226,9 +218,6 @@ def preprocess_legal_text(text: str) -> str:
     # Gộp 3+ dòng trống liên tiếp thành 2 dòng trống (giữ paragraph break)
     text = re.sub(r"\n{3,}", "\n\n", text)
     
-    # Thêm boundary: chèn dòng trống trước Chương / Điều / Mục
-    # CHỈ khi chúng là HEADER THẬT (không đứng sau keyword tham chiếu)
-    # Tham chiếu inline: "theo Điều 36", "tại Điều 5", "khoản 3 Điều 10"... → KHÔNG chèn boundary
     text = re.sub(r"(?<!\n)(Chương\s+(?:[IVXLCDM]+|\d+))", r"\n\n\1", text, flags=re.IGNORECASE)
     
     # Điều: chỉ chèn boundary nếu KHÔNG có keyword tham chiếu ngay trước
@@ -236,8 +225,6 @@ def preprocess_legal_text(text: str) -> str:
         r'(?:theo|tại|căn\s*cứ|nêu\s*tại|quy\s*định\s*tại|thuộc|của|xem|nói\s*tại|khoản\s*\d+)\s*$',
         re.IGNORECASE,
     )
-    # Dùng 2 bước: (1) tìm tất cả vị trí "Điều X" → (2) chèn \n\n cho header thật
-    _dieu_positions = []  # list of (start, end) cần chèn boundary
     for m in re.finditer(r'Điều\s+\d+[\s:.]', text, flags=re.IGNORECASE):
         start = m.start()
         if start == 0 or text[start - 1] == '\n':
@@ -261,8 +248,6 @@ def preprocess_legal_text(text: str) -> str:
     
     return text.strip()
 
-
-# Pattern nhận diện tham chiếu chéo (dùng chung cho nhiều hàm)
 _CROSSREF_KW = re.compile(
     r'(?:theo|tại|căn\s*cứ|nêu\s*tại|quy\s*định\s*tại|thuộc|của|xem|nói\s*tại)'
     r'\s*$',
@@ -275,12 +260,7 @@ _CLAUSE_BEFORE_ARTICLE = re.compile(
 
 
 def _is_header_article(text: str, match: re.Match) -> bool:
-    """
-    Kiểm tra "Điều X" tại vị trí match có phải header thật hay là tham chiếu chéo.
-    
-    Header thật: ở đầu dòng, đầu text, hoặc sau dấu chấm/xuống dòng.
-    Tham chiếu: đứng sau "theo", "tại", "quy định tại", "khoản N ...", v.v.
-    """
+
     start = match.start()
     # Header thật: ở đầu text
     if start == 0:
@@ -301,9 +281,7 @@ def _is_header_article(text: str, match: re.Match) -> bool:
 
 
 def extract_metadata(text: str) -> dict:
-    """
-    Enhanced metadata extraction — HEADER-FIRST.
-    
+    """    
     Chiến lược:
     1. Tìm "Điều X" là HEADER THẬT (đầu dòng, không phải tham chiếu chéo)
     2. Fallback: nếu không có header thật, lấy Điều đầu tiên bất kỳ
@@ -318,7 +296,6 @@ def extract_metadata(text: str) -> dict:
     section = None
     chapter = None
 
-    # --- Bước 1: Tìm "Điều X" là HEADER THẬT (ưu tiên) ---
     all_article_matches = list(re.finditer(r'\bđiều\s*(\d+)\b', lower))
     header_article_match = None
     for m in all_article_matches:
@@ -338,8 +315,6 @@ def extract_metadata(text: str) -> dict:
         except Exception:
             pass
 
-    # --- Bước 2: Tìm cặp "Điều X ... khoản Y" gần nhau (≤200 ký tự) ---
-    # Ức chế: không cho phép từ "điều" khác xen giữa
     inline_match = re.search(
         r'\bđiều\s*(\d+)(.{0,200}?)khoản\s*(\d+)\b', lower
     )
@@ -356,7 +331,6 @@ def extract_metadata(text: str) -> dict:
             except Exception:
                 pass
 
-    # --- Bước 3: Nếu chưa có clause, thử list numbering ---
     if clause is None and article is not None:
         clause_matches = re.findall(r"^(\d+)\.\s+", original_text, re.MULTILINE)
         if clause_matches:
@@ -364,8 +338,6 @@ def extract_metadata(text: str) -> dict:
                 clause = int(clause_matches[-1])
             except Exception:
                 pass
-
-    # --- Bước 4: Fallback clause riêng lẻ ---
     if clause is None:
         m = re.search(r"(?:^|\b)khoản\s*(\d+)\b", lower)
         if m:
@@ -373,8 +345,6 @@ def extract_metadata(text: str) -> dict:
                 clause = int(m.group(1))
             except Exception:
                 pass
-
-    # --- Bước 5: Section và Chapter ---
     m = re.search(r"(?:^|\b)mục\s*([ivxlcdm]+|\d+)\b", lower)
     if m:
         section = m.group(1).upper()
@@ -387,7 +357,6 @@ def extract_metadata(text: str) -> dict:
 
 
 def chunk_text(text: str, max_tokens: int = 256, overlap_tokens: int = 50) -> list[str]:
-    """Split text into overlapping chunks."""
     try:
         enc = tiktoken.get_encoding("cl100k_base")
         tokens = enc.encode(text)
@@ -500,13 +469,6 @@ def chunk_pdf_by_structure(
     document_name: str = "Quy chế đào tạo",
     doc_ranges: Optional[list[dict]] = None,
 ) -> list[dict]:
-    """
-    Structure-aware chunking for legal/student-handbook PDFs.
-
-    Core rule:
-    - Split by real headings in source text (Chương / Mục / Điều / heading La Mã / tiêu đề),
-      not only by Điều, to avoid attaching unrelated sections to the nearest Điều.
-    """
     try:
         enc = tiktoken.get_encoding("cl100k_base")
     except Exception:
@@ -594,7 +556,6 @@ def chunk_pdf_by_structure(
                 return fam, title
         return document_name, document_name
 
-    # Recover heading boundaries if line breaks were previously flattened.
     pdf_text = re.sub(r'(?<=[.?!])\s+(Điều\s+\d+[\s:.])', r'\n\n\1', pdf_text, flags=re.IGNORECASE)
     pdf_text = re.sub(r'(?<=[.?!])\s+(Chương\s+(?:[IVXLCDM]+|\d+))', r'\n\n\1', pdf_text, flags=re.IGNORECASE)
     pdf_text = re.sub(r'(?<=[.?!])\s+(Mục\s+(?:[IVXLCDM]+|\d+))', r'\n\n\1', pdf_text, flags=re.IGNORECASE)
@@ -851,8 +812,6 @@ def extract_pdf_text(pdf_path: str) -> str:
         raw = raw or ""
         raw = raw.replace("\r\n", "\n").replace("\r", "\n")
         raw = re.sub(r"(\w)-\s*\n\s*(\w)", r"\1\2", raw)
-        # Dùng preprocess_legal_text thay vì preprocess_text
-        # để GIỮ NGUYÊN \n cho structure-aware chunking
         return preprocess_legal_text(raw)
 
     last_error: Exception | None = None
@@ -932,10 +891,7 @@ def _guess_doc_family_from_title(title: str) -> str:
 
 
 def infer_pdf_doc_ranges(pdf_path: str) -> list[dict]:
-    """
-    Infer major document ranges (start/end page + family) from the handbook TOC.
-    Falls back to known ranges for `quyche.pdf` when TOC parsing fails.
-    """
+
     entries: list[tuple[int, str]] = []
     page_count = 0
 
@@ -2041,14 +1997,7 @@ class RAGEngine:
     # ==========================================================================
 
     def rerank_results(self, query: str, results: list[dict], top_k: int = 5) -> list[dict]:
-        """
-        Two-stage reranking: BM25 fast filtering → Cross-encoder deep reranking.
-        
-        Stage 1: Nếu có nhiều hơn 10 candidates, dùng BM25 score nhanh để lọc xuống 10
-        Stage 2: Cross-encoder chỉ chạy trên 10 candidates (thay vì 30)
-        
-        Tốc độ: ~60-70% nhanh hơn so với rerank toàn bộ candidates.
-        """
+
         if not results:
             return results
         
@@ -2294,8 +2243,6 @@ class RAGEngine:
         corpus = "\n".join(corpus_parts)
         corpus_l = corpus.lower()
 
-        # Chỉ đánh dấu "câu hỏi ra quyết định cá nhân" khi có tín hiệu thật sự.
-        # Tránh bắt người dùng nhập dữ liệu cá nhân cho câu hỏi thông tin chung.
         decision_query = any(
             k in query_l
             for k in [
