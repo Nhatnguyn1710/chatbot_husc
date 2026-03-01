@@ -16,11 +16,6 @@ import threading
 import requests
 
 
-# ============================================================
-# Flask = UI + Auth + Session + DB
-# Chat/RAG/LLM = FastAPI service (api_chat.py + rag_core.py)
-# ============================================================
-
 load_dotenv()
 
 app = Flask(__name__)
