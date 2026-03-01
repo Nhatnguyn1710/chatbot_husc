@@ -1,0 +1,254 @@
+/* ====== NỀN & TOÀN TRANG ====== */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #007bff, #00a8ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* ====== KHUNG CHÍNH ====== */
+.container {
+  width: 400px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ====== HEADER: LOGO + ICON ====== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+/* Logo HUSC */
+.logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+  object-fit: contain;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Icon đăng nhập */
+.icon {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 45px;     /* đẩy icon sang trái */
+  top: 10px;
+  opacity: 0.9;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.icon:hover {
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+/* ====== TIÊU ĐỀ ====== */
+h2 {
+  color: #007bff;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+/* ====== FORM ====== */
+form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+label {
+  font-size: 14px;
+  color: #333;
+  margin-top: 8px;
+}
+
+input {
+  margin-top: 4px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0,123,255,0.4);
+}
+
+/* ====== NÚT ====== */
+button {
+  background: linear-gradient(90deg, #007bff, #00a8ff);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #0062cc, #0096f5);
+  transform: translateY(-1px);
+}
+
+/* ====== THÔNG BÁO LỖI ====== */
+.error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+/* ====== LIÊN KẾT ====== */
+.link {
+  text-align: center;
+  margin-top: 18px;
+}
+
+.link a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link a:hover {
+  text-decoration: underline;
+}
+
+/* ====== CHÂN TRANG ====== */
+footer {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+  font-size: 13px;
+}
+/* ====== SUCCESS MESSAGE - MATERIAL DESIGN ====== */
+.success-message {
+    color: #1e4620;
+    background: #edf7ed;
+    border-left: 4px solid #4caf50;
+    padding: 18px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 15px;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.15);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    animation: slideInRight 0.5s ease-out;
+    position: relative;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.success-message::before {
+    content: "";
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.success-message p {
+    margin: 0;
+    line-height: 1.5;
+}
+/* ====== THÔNG TIN TRƯỜNG ====== */
+.university-info {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    text-align: center;
+}
+
+.university-name {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.university-address,
+.university-contact {
+    font-size: 12px;
+    color: #6c757d;
+    margin-bottom: 6px;
+    line-height: 1.4;
+}
+
+.university-address i,
+.university-contact i {
+    color: #007bff;
+    margin-right: 5px;
+    font-size: 11px;
+}
+/* ====== CHÂN TRANG ====== */
+footer {
+  text-align: center;
+  margin-top: 18px;
+  color: #666;
+  font-size: 13px;
+}
+
+/* ====== THÔNG TIN TRƯỜNG ====== */
+.university-info {
+  margin-top: 15px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  text-align: center;
+}
+
+.university-name {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.university-address,
+.university-contact {
+  font-size: 12px;
+  color: #6c757d;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.university-address i,
+.university-contact i {
+  color: #007bff;
+  margin-right: 5px;
+  font-size: 11px;
+}
