@@ -199,15 +199,6 @@ def preprocess_text(text: str) -> str:
 
 
 def preprocess_legal_text(text: str) -> str:
-    """
-    Tiền xử lý chuyên biệt cho văn bản pháp lý (PDF quy chế).
-    
-    Khác với preprocess_text():
-    - GIỮ NGUYÊN ký tự xuống dòng (\n) để bảo toàn cấu trúc Chương/Điều/Khoản
-    - Chỉ gộp space/tab, KHÔNG gộp newline
-    - Xóa số trang rác từ PDF
-    - Thêm boundary rõ ràng trước Chương, Điều, Mục
-    """
     text = unicodedata.normalize("NFC", text or "")
     text = text.replace("\ufeff", "").replace("\u200b", "").replace("\u00ad", "")
     
@@ -275,12 +266,7 @@ _CLAUSE_BEFORE_ARTICLE = re.compile(
 
 
 def _is_header_article(text: str, match: re.Match) -> bool:
-    """
-    Kiểm tra "Điều X" tại vị trí match có phải header thật hay là tham chiếu chéo.
     
-    Header thật: ở đầu dòng, đầu text, hoặc sau dấu chấm/xuống dòng.
-    Tham chiếu: đứng sau "theo", "tại", "quy định tại", "khoản N ...", v.v.
-    """
     start = match.start()
     # Header thật: ở đầu text
     if start == 0:
@@ -288,7 +274,6 @@ def _is_header_article(text: str, match: re.Match) -> bool:
     # Header thật: ở đầu dòng (ký tự trước là \n)
     if text[start - 1] == '\n':
         return True
-    # Lấy 50 ký tự trước match để kiểm tra context
     prefix_start = max(0, start - 50)
     prefix = text[prefix_start:start]
     # Tham chiếu: đứng sau keyword
@@ -301,15 +286,6 @@ def _is_header_article(text: str, match: re.Match) -> bool:
 
 
 def extract_metadata(text: str) -> dict:
-    """
-    Enhanced metadata extraction — HEADER-FIRST.
-    
-    Chiến lược:
-    1. Tìm "Điều X" là HEADER THẬT (đầu dòng, không phải tham chiếu chéo)
-    2. Fallback: nếu không có header thật, lấy Điều đầu tiên bất kỳ
-    3. Tìm "khoản Y" gần Điều X nhất (giới hạn 200 ký tự)
-    4. Fallback "khoản Y" riêng lẻ nếu cần
-    """
     lower = (text or "").lower()
     original_text = text or ""
 
@@ -318,13 +294,12 @@ def extract_metadata(text: str) -> dict:
     section = None
     chapter = None
 
-    # --- Bước 1: Tìm "Điều X" là HEADER THẬT (ưu tiên) ---
     all_article_matches = list(re.finditer(r'\bđiều\s*(\d+)\b', lower))
     header_article_match = None
     for m in all_article_matches:
         if _is_header_article(original_text, m):
             header_article_match = m
-            break  # Lấy header thật đầu tiên
+            break  
     
     if header_article_match:
         try:
@@ -332,14 +307,11 @@ def extract_metadata(text: str) -> dict:
         except Exception:
             pass
     elif all_article_matches:
-        # Fallback: lấy Điều đầu tiên (có thể là tham chiếu)
         try:
             article = int(all_article_matches[0].group(1))
         except Exception:
             pass
 
-    # --- Bước 2: Tìm cặp "Điều X ... khoản Y" gần nhau (≤200 ký tự) ---
-    # Ức chế: không cho phép từ "điều" khác xen giữa
     inline_match = re.search(
         r'\bđiều\s*(\d+)(.{0,200}?)khoản\s*(\d+)\b', lower
     )
@@ -356,7 +328,6 @@ def extract_metadata(text: str) -> dict:
             except Exception:
                 pass
 
-    # --- Bước 3: Nếu chưa có clause, thử list numbering ---
     if clause is None and article is not None:
         clause_matches = re.findall(r"^(\d+)\.\s+", original_text, re.MULTILINE)
         if clause_matches:
@@ -365,7 +336,6 @@ def extract_metadata(text: str) -> dict:
             except Exception:
                 pass
 
-    # --- Bước 4: Fallback clause riêng lẻ ---
     if clause is None:
         m = re.search(r"(?:^|\b)khoản\s*(\d+)\b", lower)
         if m:
@@ -373,8 +343,6 @@ def extract_metadata(text: str) -> dict:
                 clause = int(m.group(1))
             except Exception:
                 pass
-
-    # --- Bước 5: Section và Chapter ---
     m = re.search(r"(?:^|\b)mục\s*([ivxlcdm]+|\d+)\b", lower)
     if m:
         section = m.group(1).upper()
@@ -424,11 +392,7 @@ def chunk_text(text: str, max_tokens: int = 256, overlap_tokens: int = 50) -> li
 
 
 def chunk_text_hierarchical(text: str, max_tokens: int = 512) -> list[str]:
-    """
-    Chunk văn bản theo cấu trúc Điều > Khoản > Đoạn văn.
-    Ưu tiên giữ nguyên một Điều hoàn chỉnh nếu có thể.
-    Fallback về chunk_text() nếu không phát hiện cấu trúc Điều.
-    """
+
     try:
         enc = tiktoken.get_encoding("cl100k_base")
     except Exception:
@@ -932,10 +896,7 @@ def _guess_doc_family_from_title(title: str) -> str:
 
 
 def infer_pdf_doc_ranges(pdf_path: str) -> list[dict]:
-    """
-    Infer major document ranges (start/end page + family) from the handbook TOC.
-    Falls back to known ranges for `quyche.pdf` when TOC parsing fails.
-    """
+   
     entries: list[tuple[int, str]] = []
     page_count = 0
 
@@ -2041,14 +2002,7 @@ class RAGEngine:
     # ==========================================================================
 
     def rerank_results(self, query: str, results: list[dict], top_k: int = 5) -> list[dict]:
-        """
-        Two-stage reranking: BM25 fast filtering → Cross-encoder deep reranking.
-        
-        Stage 1: Nếu có nhiều hơn 10 candidates, dùng BM25 score nhanh để lọc xuống 10
-        Stage 2: Cross-encoder chỉ chạy trên 10 candidates (thay vì 30)
-        
-        Tốc độ: ~60-70% nhanh hơn so với rerank toàn bộ candidates.
-        """
+    
         if not results:
             return results
         
@@ -3307,9 +3261,6 @@ Bạn là **trợ lý học vụ HUSC**. Trả lời các câu hỏi về quy ch
                     flags=re.IGNORECASE,
                 )
 
-        # -----------------------------
-        # Validate Khoản
-        # -----------------------------
         cited_clauses = re.findall(r'Khoản\s+(\d+)', answer, re.IGNORECASE)
         unique_cited_clauses = set(cited_clauses)
         valid_clauses_norm = {str(c) for c in valid_clauses}
@@ -3326,9 +3277,6 @@ Bạn là **trợ lý học vụ HUSC**. Trả lời các câu hỏi về quy ch
                     flags=re.IGNORECASE,
                 )
 
-        # -----------------------------
-        # Validate Phần [Tiêu đề]
-        # -----------------------------
         cited_titles_raw: list[str] = []
         cited_titles_raw.extend(re.findall(r'Phần\s+[“"]([^”"\n]{2,160})[”"]', answer, re.IGNORECASE))
         cited_titles_raw.extend(re.findall(r'Phần\s*\[\s*([^\]\n]{2,160})\s*\]', answer, re.IGNORECASE))
@@ -3355,9 +3303,6 @@ Bạn là **trợ lý học vụ HUSC**. Trả lời các câu hỏi về quy ch
                     flags=re.IGNORECASE,
                 )
 
-        # -----------------------------
-        # Validate "Theo [Tên văn bản]"
-        # -----------------------------
         if valid_families:
             valid_family_norm = {normalize_title(x) for x in valid_families if str(x).strip()}
             family_mentions = re.findall(
@@ -3559,9 +3504,6 @@ Bạn là **trợ lý học vụ HUSC**. Trả lời các câu hỏi về quy ch
                 # Nếu có lỗi với intent classifier, tiếp tục với RAG pipeline
                 print(f"⚠️ Intent classification error: {e}")
         
-        # =====================================================================
-        # STEP 2: Academic queries → RAG Pipeline (giữ nguyên logic cũ)
-        # =====================================================================
         ready_for_cache = self._gemini_ready and (self._embedder is not None) and (self._index is not None) and bool(self._records)
         key = self._make_answer_cache_key(user_msg, recent_history)
         if ready_for_cache:
@@ -3573,11 +3515,6 @@ Bạn là **trợ lý học vụ HUSC**. Trả lời các câu hỏi về quy ch
         if ready_for_cache and self._should_cache_answer(answer):
             self._answer_cache_set(key, answer)
         return answer
-
-
-# ==============================================================================
-# MODULE-LEVEL BACKWARD COMPATIBILITY
-# ==============================================================================
 
 # Default singleton instance
 _default_engine: Optional[RAGEngine] = None
