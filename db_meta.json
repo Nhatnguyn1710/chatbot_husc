@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "built_at_unix": 1769533062.8557124,
+  "embedding_model": "BAAI/bge-m3",
+  "reranker_model": "BAAI/bge-reranker-base",
+  "record_count": 595,
+  "index_metric": null,
+  "index_text": "question+text"
+}
