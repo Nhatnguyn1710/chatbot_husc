@@ -1,0 +1,78 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.15.4
+    container_name: husc_qdrant
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    restart: unless-stopped
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: husc_sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: husc_api
+    command: python api_chat.py
+    env_file:
+      - .env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8000
+      VECTOR_DB_TYPE: qdrant
+      QDRANT_URL: http://qdrant:6333
+      QDRANT_RECREATE_ON_BUILD: "false"
+    depends_on:
+      - qdrant
+    ports:
+      - "8000:8000"
+    volumes:
+      - hf_cache:/app/.cache/huggingface
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: husc_ui
+    command: python flask_UI.py
+    env_file:
+      - .env
+    environment:
+      FASTAPI_BASE_URL: http://api:8000
+      FLASK_DEBUG: "0"
+      DB_DRIVER: ODBC Driver 18 for SQL Server
+      DB_SERVER: sqlserver
+      DB_PORT: 1433
+      DB_NAME: ChatbotDB
+      DB_TRUSTED_CONNECTION: "false"
+      DB_ENCRYPT: "no"
+      DB_TRUST_SERVER_CERTIFICATE: "yes"
+      DB_AUTO_CREATE: "true"
+    depends_on:
+      - api
+      - sqlserver
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+
+volumes:
+  qdrant_storage:
+  hf_cache:
+  sqlserver_data:
