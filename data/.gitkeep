@@ -1,0 +1,2 @@
+# This file ensures the data directory is preserved in git
+# This directory contains essential datasets for the HUSC RAG Chatbot

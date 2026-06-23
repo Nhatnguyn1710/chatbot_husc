@@ -1,0 +1,226 @@
+# CẢI TIẾN CHATBOT – STREAMING TOKEN & KIẾN TRÚC PHẢN HỒI
+
+Tài liệu này giúp bạn **đọc nhanh – hiểu đúng – làm từng bước** để nâng cấp chatbot hiện tại từ *typing giả lập* sang *streaming token chuẩn LLM*.
+
+---
+
+## 1. Tình trạng hiện tại (AS-IS)
+
+### Backend
+- Trả về **FULL response** dạng JSON
+- Không có streaming (SSE / fetch stream / WebSocket)
+
+### Frontend
+- Có **typing effect** (theo *từ* hoặc *ký tự*)
+- Chỉ là **giả lập animation**, không phải token thật
+
+### Đánh giá
+- UI đẹp, mượt, demo tốt
+- **Chưa đúng kiến trúc LLM production**
+
+---
+
+## 2. Mục tiêu cải tiến (TO-BE)
+
+- Backend **stream từng token / chunk** ngay khi LLM sinh
+- Frontend **render ngay khi nhận** (không đợi full câu)
+- Tách rõ:
+  - Text thường → streaming
+  - Bảng / Toán / Markdown phức tạp → render 1 lần
+
+---
+
+## 3. Những việc CẦN làm (ưu tiên theo thứ tự)
+
+### (1) Thêm streaming thật ở Backend ⭐⭐⭐⭐⭐
+
+**Mục tiêu**: giảm độ trễ cảm nhận, giống ChatGPT
+
+Hướng triển khai:
+- FastAPI:
+  - `StreamingResponse`
+  - `yield chunk`
+- Giao thức:
+  - SSE (khuyên dùng)
+  - hoặc fetch stream
+
+> Backend chỉ làm 1 việc: **nhận token → đẩy token**
+
+---
+
+### (2) Tách 2 chế độ render rõ ràng ⭐⭐⭐⭐
+
+| Loại nội dung | Cách render |
+|--------------|-------------|
+| Text thường | Streaming token |
+| Bảng | Render 1 lần |
+| LaTeX | Render 1 lần |
+| Markdown phức tạp | Render 1 lần |
+
+> Không để frontend tự đoán nội dung
+
+---
+
+### (3) Gửi metadata từ Backend ⭐⭐⭐⭐
+
+Thay vì:
+```json
+{ "reply": "..." }
+```
+
+Nên dùng:
+```json
+{
+  "mode": "stream",
+  "content_type": "text"
+}
+```
+
+Hoặc với SSE:
+```text
+event: meta
+data: {"content_type":"text"}
+```
+
+---
+
+### (4) Giảm delay giả ở Frontend ⭐⭐⭐
+
+- Bỏ `setTimeout` giả khi đã stream thật
+- Delay = tốc độ token từ backend
+- Typing indicator chỉ hiển thị **trước token đầu tiên**
+
+---
+
+## 4. Những việc KHÔNG cần làm
+
+❌ Không cần sửa UI / CSS
+❌ Không cần thay Markdown parser
+❌ Không cần đụng MathJax
+❌ Không cần viết lại frontend toàn bộ
+
+> Phần UI của bạn **đã vượt mức đồ án**
+
+---
+
+## 5. Lộ trình đề xuất
+
+
+### Mức 3 – Chuẩn production 🚀
+- Token streaming
+- Abort / cancel response
+- Auto-scroll thông minh
+- Đo first-token latency
+
+---
+
+## 6. Câu mô tả để ghi vào báo cáo
+
+> *Hệ thống chatbot được cải tiến bằng cách áp dụng cơ chế streaming theo token ở phía backend nhằm giảm độ trễ cảm nhận, trong khi frontend xử lý hiển thị theo thời gian thực để nâng cao trải nghiệm người dùng.*
+
+---
+
+## 7. Gợi ý bước tiếp theo
+
+- [ ] Chọn SSE hay fetch stream
+- [ ] Viết route streaming
+- [ ] Sửa JS đọc stream
+- [ ] Giữ render 1 lần cho bảng / toán
+
+---
+
+<style>
+/* CSS cho typing indicator thật */
+.typing-indicator-real {
+    display: inline-flex;
+    gap: 4px;
+    padding: 8px 12px;
+}
+.typing-indicator-real span {
+    width: 6px;
+    height: 6px;
+    background: #888;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+.typing-indicator-real span:nth-child(1) { animation-delay: -0.32s; }
+.typing-indicator-real span:nth-child(2) { animation-delay: -0.16s; }
+@keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+}
+</style>
+
+<script>
+// Thay thế hàm sendMessage cũ bằng version Streaming
+async function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const message = input.value.trim();
+    if (!message) return;
+
+    // 1. UI: User Msg
+    appendMessage(message, 'user');
+    input.value = '';
+    
+    // 2. UI: Bot Bubble (Loading)
+    const chatMessages = document.getElementById('chat-messages');
+    const botMsgDiv = document.createElement('div');
+    botMsgDiv.className = 'message bot-message';
+    
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'message-content';
+    contentDiv.innerHTML = '<div class="typing-indicator-real"><span></span><span></span><span></span></div>';
+    
+    botMsgDiv.appendChild(contentDiv);
+    chatMessages.appendChild(botMsgDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    // 3. SSE Stream Logic
+    try {
+        const eventSource = new EventSource(`/api/chat/stream?q=${encodeURIComponent(message)}`);
+        
+        let fullContent = '';
+        let isFirstToken = true;
+
+        eventSource.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            
+            if (data.event === 'token') {
+                if (isFirstToken) {
+                    contentDiv.innerHTML = ''; 
+                    isFirstToken = false;
+                }
+                fullContent += data.content;
+                contentDiv.innerText = fullContent; // Stream text thô trước
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            else if (data.event === 'done') {
+                eventSource.close();
+                // Render đẹp (Markdown/Math) khi xong
+                contentDiv.innerHTML = marked.parse(data.full_content || fullContent);
+                if (window.MathJax) MathJax.typesetPromise([contentDiv]);
+                if (window.hljs) hljs.highlightAll();
+                
+                // Lưu lịch sử
+                saveChatHistory(message, data.full_content || fullContent);
+            }
+            else if (data.event === 'error') {
+                eventSource.close();
+                contentDiv.innerHTML += `<br><small style="color:red">Lỗi: ${data.content}</small>`;
+            }
+        };
+        
+        eventSource.onerror = function(err) {
+            console.error("SSE Error:", err);
+            eventSource.close();
+            if (isFirstToken) contentDiv.innerHTML = "❌ Mất kết nối.";
+        };
+
+    } catch (err) {
+        console.error("Init Error", err);
+        contentDiv.innerHTML = "❌ Lỗi hệ thống.";
+    }
+}
+
+// ...existing code...
+</script>

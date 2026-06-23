@@ -1,0 +1,405 @@
+question,answer
+Tích lũy bao nhiêu tín chỉ là đủ điều kiện ra trường?,Riêng với ngành CNTT thì sinh viên phải tích lũy đủ 123 tín chỉ trong đó có 95 tín chỉ bắt buộc và 68 tín chỉ tự chọn.
+Cần làm gì nếu đăng ký thiếu tín chỉ so với số tín chỉ quy định của học kỳ?,"Theo quy chế, sinh viên cần đăng ký đủ số tín chỉ tối thiểu mà nhà trường quy định cho mỗi học kỳ. Nếu đăng ký thiếu, cần làm đơn xin gia hạn đăng ký học phần và nộp tại Phòng Đào tạo để được xem xét giải quyết trong thời gian cho phép."
+Nếu bị rớt một môn học bắt buộc thì phải làm sao?,"Nếu bị rớt một môn học bắt buộc, bạn phải đăng ký học lại môn đó ở các học kỳ tiếp theo cho đến khi đạt. Lịch học lại sẽ được tổ chức tùy theo kế hoạch của khoa, có thể là vào học kỳ hè hoặc các học kỳ chính sau."
+Chuẩn đầu ra Tiếng Anh của khoa mình là gì?,"Chuẩn đầu ra tiếng anh theo quy định của nhà trường là đạt chứng nhận từ B1 trở lên, với toeic phải đạt  450 điểm trở lên  và Ielts là từ 4.5 trở lên."
+Điều kiện để nhận học bổng khuyến khích học tập là gì?,Học bổng khuyến khích học tập được xét dựa trên kết quả học tập và rèn luyện của học kỳ trước đó. Sinh viên cần có điểm trung bình học kỳ từ loại Khá (GPA >= 2.5) và điểm rèn luyện từ loại Tốt (>= 80 điểm) trở lên để được đưa vào danh sách xét học bổng.
+Học CNTT có cần phải giỏi Toán không?,"Câu trả lời là vừa có vừa không: tùy lĩnh vực công việc, có nơi chỉ cần toán cơ bản, nhưng cũng có nơi đòi hỏi kiến thức toán rất sâu mà học bốn năm đại học vẫn chưa chắc giải quyết xong vấn đề. Dù vậy, giỏi Toán luôn là lợi thế vì nó rèn tư duy logic, và trong ngành này, tư duy logic là yếu tố cốt lõi."
+Nên học ngôn ngữ lập trình nào để kiếm nhiều tiền?,"Không có ngôn ngữ nào “chắc chắn giàu”; lương cao phụ thuộc vai trò, công ty, địa điểm - ngôn ngữ chỉ là công cụ. Muốn tối đa cơ hội, chọn một đường rõ ràng: Python + SQL (AI/Data) hoặc Go/Java (backend hiệu năng); thêm Rust/Scala nếu nhắm phân khúc cao, Kotlin/Swift cho mobile. Quan trọng nhất là chuyên sâu vào một vai trò trả cao, làm dự án thật, nắm hệ thống phân tán, cloud/DevOps, thiết kế hệ thống - đó mới là thứ kéo mức lương lên."
+Ngành này có cần giỏi tiếng Anh không?,"Có, rất cần. 90% tài liệu, lỗi, cộng đồng và phỏng vấn kỹ thuật dùng tiếng Anh. Bạn không cần “như bản xứ”, nhưng nên đạt mức B1–B2: đọc hiểu tài liệu, viết/trao đổi kỹ thuật, nghe hiểu họp - vậy là đủ để học nhanh, làm việc nhóm, và thăng tiến."
+Học CNTT là làm gì?,"Học CNTT là học cách phân tích yêu cầu, thiết kế, lập trình, kiểm thử và triển khai phần mềm/hệ thống số. Sau đó bạn có thể làm web/di động, AI & dữ liệu, backend/devops & cloud, hoặc an toàn thông tin… Mục tiêu là tạo ra sản phẩm số đúng yêu cầu, ổn định, an toàn và hiệu quả."
+Học công nghệ thông tin cần những yếu tố gì?,"Chào bạn, để học tốt ngành Công nghệ thông tin, bạn cần trang bị những yếu tố sau:
+
+Kiến thức nền tảng vững chắc:
+Cấu trúc dữ liệu và giải thuật (DSA)
+Lập trình hướng đối tượng (OOP)
+Hệ quản trị cơ sở dữ liệu (SQL)
+Giao thức truyền tải Hypertext (HTTP)
+Hệ điều hành và mạng máy tính cơ bản
+Kinh nghiệm thực tế:
+Tham gia các dự án thực tế, sử dụng Git/GitHub
+Viết test, CI/CD, Docker/Cloud
+Kỹ năng giải quyết vấn đề và debug:
+Đọc log, tra cứu tài liệu nhanh
+Code chất lượng:
+Viết code rõ ràng (clean code)
+Bảo mật căn bản, tối ưu hiệu năng
+Kỹ năng mềm:
+Giao tiếp và làm việc nhóm tốt
+Ngoại ngữ:
+Tiếng Anh ở mức B1–B2 để đọc hiểu và trao đổi kỹ thuật
+Ngoài ra, thái độ làm việc tích cực và khả năng tự học cũng rất quan trọng để bạn có thể thành công trong ngành CNTT đầy thử thách này. Chúc bạn học tốt!"
+Học CNTT xong có thể làm những nghề gì?,"Tốt nghiệp ngành CNTT, bạn có thể đảm nhận nhiều vị trí khác nhau, tùy thuộc vào chuyên môn của mình: Lập trình viên phần mềm, Kỹ sư phần mềm, Chuyên viên an ninh mạng, Quản trị viên hệ thống, Chuyên viên phát triển web, Chuyên viên kiểm thử phần mềm. Ngoài ra, bạn cũng có thể làm việc tự do (freelancer), khởi nghiệp hoặc nghiên cứu và giảng dạy trong lĩnh vực này."
+Ngành Công nghệ Thông tin bao gồm những nội dung học nào?,"Sinh viên ngành CNTT sẽ được trang bị kiến thức nền tảng về: Viết code và xây dựng giải pháp phần mềm, Cấu trúc dữ liệu và giải thuật, Hệ thống thông tin, Mạng máy tính và bảo mật, Trí tuệ nhân tạo và khoa học dữ liệu (tùy chuyên ngành). Ngoài ra, tùy vào chương trình đào tạo, bạn có thể chọn chuyên sâu vào các lĩnh vực như: Công nghệ phần mềm, An toàn thông tin, Khoa học dữ liệu, Phát triển ứng dụng di động, Quản trị hệ thống mạng."
+Bằng cấp có quan trọng không?,"Bằng cấp không phải yếu tố quyết định thành công trong ngành CNTT, nhưng nó giúp bạn có lợi thế trong giai đoạn đầu xin việc. Các nhà tuyển dụng ngày càng quan tâm hơn đến kỹ năng thực tế, thái độ làm việc và kinh nghiệm hơn là bằng cấp. Vì vậy, ngoài tấm bằng, bạn nên trau dồi thêm kỹ năng mềm, học hỏi thực tế và xây dựng các dự án cá nhân để tạo lợi thế cạnh tranh."
+Học CNTT ra trường có lương cao không?,"Mức lương trong ngành CNTT phụ thuộc vào kinh nghiệm, kỹ năng và vị trí công việc. Một sinh viên mới ra trường có thể nhận mức lương từ 9 – 12 triệu đồng/tháng. Sau khoảng 5 năm, nếu có năng lực tốt, mức lương có thể lên tới 40 – 50 triệu đồng/tháng. Những vị trí cao cấp hoặc làm việc tại công ty quốc tế có thể đạt mức lương cao hơn."
+Công nghệ thông tin gồm những chuyên ngành nào?,"Các chuyên ngành phổ biến của Công nghệ Thông tin gồm Công nghệ phần mềm (phân tích, thiết kế, lập trình, kiểm thử, DevOps), Khoa học dữ liệu & AI/ML (xử lý dữ liệu, học máy, thống kê, MLOps), Kỹ thuật mạng & Hệ thống/Cloud/DevOps/SRE (hạ tầng, Linux, mạng, cloud, CI/CD), An toàn thông tin (bảo mật ứng dụng/hệ thống, pentest, SOC), Hệ thống thông tin/Business Analysis (mô hình hoá quy trình, phân tích nghiệp vụ), Phát triển Web/Mobile (Frontend, Backend, Full-stack, Android/iOS), Embedded/IoT (vi điều khiển, hệ nhúng), và một số hướng mở rộng như Game Dev, UI/UX, Đồ hoạ, AR/VR, FinTech, HealthTech…"
+Những đặc điểm nào được các nhà tuyển dụng tìm kiếm ở các ứng viên Công nghệ thông tin?,"Nhà tuyển dụng CNTT thường tìm ứng viên có nền tảng vững (DSA, OOP, SQL, HTTP, hệ điều hành và mạng cơ bản), kinh nghiệm thực hành qua dự án thật (Git/GitHub, viết test, CI/CD, Docker/Cloud), khả năng giải quyết vấn đề và debug (đọc log, tra cứu tài liệu nhanh), code chất lượng (clean code, bảo mật căn bản, tối ưu hiệu năng), giao tiếp và làm việc nhóm tốt, tiếng Anh ở mức B1–B2 để đọc–trao đổi kỹ thuật, cùng tư duy sản phẩm (hiểu nhu cầu người dùng, ưu tiên đúng việc) và thái độ chuyên nghiệp (chủ động, học nhanh, kiên trì, giữ cam kết)."
+Học CNTT có nhất thiết phải giỏi thuyết trình/giao tiếp?,"Bạn không cần nói hay như diễn giả, nhưng biết giao tiếp ở mức đủ dùng là bắt buộc trong CNTT. Chỉ cần: giới thiệu dự án 1–2 phút (làm gì, làm sao, kết quả), hỏi 3–5 câu để hiểu rõ yêu cầu, viết README ngắn 1 trang, báo cáo mỗi ngày dưới 1 phút (hôm qua/hôm nay/vướng gì), và tiếng Anh tầm B1–B2 để đọc tài liệu, viết issue/PR. Làm vai trò BA/PM/Tech Lead hoặc làm với khách quốc tế thì cần giỏi hơn; còn dev mới–trung bình đạt các mốc trên là đủ dùng."
+Nên chọn chuyên ngành nào trong CNTT để hợp với mình?,"Hãy chọn chuyên ngành CNTT theo công thức sở thích + thế mạnh + nhu cầu việc làm: nếu bạn thích giao diện và trải nghiệm người dùng, chọn Frontend/Web hoặc Mobile; thích xử lý logic và hiệu năng hệ thống, chọn Backend (Java/Go/.NET); mê dữ liệu, chọn Data Engineer; thích phân tích và mô hình, chọn Data Scientist/ML Engineer; thích hạ tầng tự động hóa, chọn DevOps/Cloud/SRE; thích bảo mật, chọn An toàn thông tin; thích phần cứng, chọn Embedded/IoT. Cách quyết nhanh: thử 2 mini-project ở 2 mảng bạn hứng thú (mỗi cái 6–8 giờ), rồi chọn mảng khiến bạn “vào flow” nhất và có nhiều tin tuyển dụng; sau đó làm 1 dự án thực tế 2–4 tuần và triển khai demo. Nếu còn phân vân, ưu tiên Backend (Java/Go) hoặc Data/AI (Python + SQL) vì cơ hội rộng và dễ chuyển hướng sau này."
+Nên bắt đầu với ngôn ngữ lập trình nào?,"Mới học thì chọn một ngôn ngữ trước và làm vài bài/dự án nhỏ cho chắc. Dễ nhất là Python (học nhanh, làm được nhiều thứ như AI, xử lý dữ liệu, tự động hoá). Muốn làm web thì học JavaScript rồi chuyển sang TypeScript (làm được cả frontend và backend với Node.js). Thích backend mạnh, ổn định thì Java; muốn gọn, nhanh thì Go. Làm mobile: Kotlin (Android) hoặc Swift (iOS). Nếu chưa rõ hướng, cứ học Python + SQL + Git khoảng 1–2 tháng rồi quyết tiếp."
+Học nhóm hay học một mình hiệu quả hơn?,"Cả hai đều hiệu quả nếu dùng đúng lúc: tự học phù hợp khi cần tập trung đọc tài liệu, luyện DSA, viết code, ôn lý thuyết sâu; học nhóm (2–4 người) hợp để thảo luận ý tưởng, gỡ bài khó, code review, tập thuyết trình. Gợi ý phân bổ 70% tự học – 30% học nhóm mỗi tuần. Với buổi nhóm 60–90 phút, hãy: 10’ đặt mục tiêu → 40–60’ làm và giải thích → 10–20’ tổng kết (có người điều phối và người ghi chép). Nếu tiến bộ chững 2 tuần, tăng học nhóm để nhận phản hồi; nếu “nói nhiều hơn làm”, giảm nhóm và tăng tự học."
+Cách xử lý sợ sai/sợ hỏi khi làm nhóm hoặc hỏi thầy/coder khác?,"Để bớt sợ sai sợ hỏi, hãy đổi góc nhìn: hỏi để tiết kiệm thời gian của cả nhóm, không phải để thể hiện dốt giỏi. Trước khi hỏi, dành 10–15 phút đọc nhanh tài liệu, thử một hai cách và ghi lại mình đã làm gì. Khi hỏi, kèm ví dụ tái hiện tối thiểu gồm môi trường, các bước gây lỗi, phần log chính, kỳ vọng so với thực tế và trình bày gọn theo bốn ý: bối cảnh → đã thử → đang kẹt ở đâu → cần gợi ý bước tiếp theo. Tự giới hạn 30–60 phút không ra thì phải hỏi, nhắm đúng người, mỗi lần chỉ một vấn đề, tin nhắn 5–7 dòng. Giữ thái độ học hỏi, nói lời cảm ơn, báo lại kết quả, sai thì sửa và luyện thói quen hỏi nhỏ 1–2 lần mỗi tuần để quen dần."
+Muốn học về AI thì cần nền tảng gì?,"Muốn học AI bạn cần vững ba nền tảng. Một là toán cơ bản gồm đại số tuyến tính, giải tích, xác suất và thống kê. Hai là lập trình với Python cùng thư viện NumPy, Pandas, scikit learn, thêm Git, Linux cơ bản và SQL để xử lý dữ liệu. Ba là quy trình máy học thực hành gồm thu thập và làm sạch dữ liệu, chia tập, huấn luyện, đánh giá bằng các chỉ số như độ chính xác, độ bao phủ và F1, kèm khả năng đọc tài liệu tiếng Anh. Khi đã vững, học tiếp deep learning với PyTorch hoặc TensorFlow và hiểu cách dùng GPU để triển khai hiệu quả."
+Muốn trở thành dev giỏi cần những yếu tố gì?,"Để trở thành dev giỏi bạn cần nền tảng vững về cấu trúc dữ liệu và thuật toán, hiểu hệ điều hành mạng và cơ sở dữ liệu, viết code sạch dễ bảo trì và có thói quen viết test. Bạn phải giỏi phân tích vấn đề và debug, dùng thành thạo Git Linux SQL và ít nhất một ngôn ngữ chính cùng một framework chủ lực. Giao tiếp rõ ràng và tiếng Anh đủ dùng để đọc tài liệu và trao đổi kỹ thuật. Có tinh thần trách nhiệm chủ động học liên tục và biết quản lý thời gian. Hiểu tư duy sản phẩm biết ưu tiên yêu cầu và chú ý bảo mật hiệu năng và độ ổn định. Luôn ghi chép tài liệu review chéo với đồng đội và hoàn thành dự án có kết quả đo được."
+"Học lại và học cải thiện khác nhau như thế nào, điểm nào được tính vào điểm trung bình tích lũy?","Tại HUSC, học lại là bạn đăng ký học lại học phần đã rớt điểm F hoặc không đủ điều kiện dự thi cho đến khi đạt, và sau khi đạt thì điểm mới sẽ được dùng để tính điểm trung bình tích lũy. Học cải thiện là bạn tự nguyện đăng ký học lại học phần đã qua để nâng điểm trung bình; nhà trường quy định điểm cao nhất trong các lần học của học phần đó sẽ là điểm cuối cùng dùng để tính điểm trung bình tích lũy, các lần điểm khác vẫn lưu trên bảng điểm. Quy định này được nêu trong Quy chế học vụ của HUSC và tài liệu dẫn chiếu của Đại học Huế"
+"Thời gian tối đa hoàn thành chương trình, bảo lưu kết quả học tập và thủ tục tạm dừng như thế nào?","Theo quy chế của Đại học Huế, thời gian tối đa để hoàn thành một chương trình không vượt quá hai lần thời gian theo kế hoạch học tập chuẩn của chương trình. Nghĩa là chương trình chuẩn bốn năm thì tối đa tám năm, chương trình năm năm thì tối đa mười năm. Thời gian nghỉ học tạm thời vì nhu cầu cá nhân vẫn được tính vào thời hạn tối đa này. Để bảo lưu kết quả và tạm dừng, bạn làm đơn xin nghỉ học tạm thời kèm minh chứng theo hướng dẫn của nhà trường, nộp đúng hạn cho Phòng Đào tạo để trình Hiệu trưởng xem xét và chờ thông báo trên UMS; khi quay lại học, các tín chỉ đã tích lũy còn hiệu lực trong khung thời gian tối đa sẽ được công nhận. Quy định khung nằm ở Thông tư 08 của Bộ Giáo dục và Đào tạo và Quy chế đào tạo tín chỉ của Đại học Huế, còn biểu mẫu và mốc thời gian nộp đơn HUSC công bố tại mục Quy định quy chế và trong thông báo từng học kỳ."
+Khi nào bị cảnh báo học vụ và cách gỡ cảnh báo?,"Bạn bị cảnh báo học vụ nếu điểm trung bình học kỳ dưới 0,80 ở học kỳ đầu của khóa hoặc dưới 1,00 ở các học kỳ tiếp theo; ngưỡng này được HUSC áp dụng theo Quy chế học vụ và được Phòng Đào tạo công bố vào cuối mỗi kỳ. Để gỡ cảnh báo, bạn cần nâng điểm trung bình học kỳ ở kỳ kế tiếp lên từ mức yêu cầu trở lên, ưu tiên xử lý các học phần điểm thấp, đăng ký khối lượng học tập phù hợp và tuân thủ đầy đủ quy định chuyên cần; nhà trường sẽ rà soát và cập nhật trạng thái sau khi có kết quả học kỳ."
+Khi học hoài không tiến bộ nên điều chỉnh ra sao?,"Khi học mãi không tiến bộ, hãy dừng một ngày để chẩn đoán rồi đổi cách làm. Xác định mục tiêu cụ thể theo tuần, chia nhỏ từng kỹ năng thành bài luyện mười đến hai mươi phút và đo bằng số bài hoàn thành, số lỗi giảm, thời gian giải một bài. Đổi tài liệu nếu đọc hoài không hiểu, ưu tiên tài liệu có ví dụ và bài tập có đáp án. Luyện có phản hồi bằng cách nhờ bạn review, hỏi trợ giảng hoặc đăng câu hỏi kèm ví dụ tái hiện lỗi. Áp dụng phiên tập trung có hẹn giờ, sau mỗi phiên ghi lại bạn đã làm gì và một điều rút ra. Học theo chu kỳ lặp lại cách ngày để nhớ lâu, dùng thẻ từ hoặc ghi chú ngắn. Mỗi tuần làm một bài kiểm tra nhỏ để tự chấm và điều chỉnh. Nếu vẫn tắc, nhờ một người hướng dẫn gỡ đúng chỗ kẹt, sắp xếp lại môi trường học gọn gàng, ngủ đủ và dành một ngày giảm tải sau mỗi sáu đến tám tuần để hồi phục."
+Học cấu trúc dữ liệu và thuật toán như thế nào cho hiệu quả?,"Học cấu trúc dữ liệu và thuật toán hiệu quả bắt đầu từ nền tảng vững về mảng chuỗi danh sách liên kết ngăn xếp hàng đợi cây bảng băm và đồ thị kèm các thuật toán sắp xếp tìm kiếm duyệt BFS DFS và quy hoạch động cơ bản. Với mỗi chủ đề hãy đọc ý tưởng và độ phức tạp, viết lại bằng lời của bạn, cài đặt từ đầu rồi so sánh với lời giải chuẩn. Luyện theo bộ chủ đề thay vì làm ngẫu nhiên như hai con trỏ trượt cửa sổ chia để trị quy hoạch động và tham lam, mỗi ngày làm ít nhất ba bài có mức tăng dần và sau 24 đến 48 giờ ôn lại để nhớ lâu. Luôn vẽ sơ đồ dữ liệu, viết giả mã ngắn, kiểm thử bằng dữ liệu biên và đo thời gian cùng bộ nhớ để hiểu chi phí. Cuối tuần tổng kết lỗi hay gặp và ghi lại mẫu tư duy giải bài để dùng lại, sau đó làm một đề mô phỏng phỏng vấn trong giới hạn thời gian để kiểm tra mức độ tiến bộ."
+Giới thiệu về bạn đi,"Mình là IT Mentor - người tư vấn, giải đáp thắc mắc về những vấn đề thuộc ngành CNTT HUSC. Mình sẽ giúp bạn hiểu hơn về quy định và quy chế đào tạo của trường."
+Cách vượt cảm giác kém cỏi khi thấy bạn bè đã đi làm part time?,"Bạn nên tập trung ở các môn trên trường thay vì suy nghĩ nên đi làm theo bạn bè vì nếu gia đình không có khó khăn thì tập trung lấy học bổng sẽ tốt hơn, học bổng thậm chí cao hơn học phí mà bạn đang đóng."
+Học vượt tín chỉ có điều kiện gì?,"1. Điều kiện chung để đăng ký học vượt
+Về cơ bản, sinh viên được quyền đăng ký học vượt nếu đáp ứng các điều kiện sau:
+
+Không bị giới hạn về học lực: Quy chế không quy định sinh viên phải có học lực loại Khá hay Giỏi mới được học vượt. Điều này có nghĩa là ngay cả khi học lực Trung bình, bạn vẫn có thể đăng ký học các học phần của học kỳ kế tiếp, miễn là đáp ứng các điều kiện về số tín chỉ và không có học phần tiên quyết nào chưa hoàn thành.
+
+Đáp ứng điều kiện tiên quyết: Bạn phải đảm bảo đã hoàn thành các học phần tiên quyết (nếu có) của học phần mà bạn muốn học vượt. Hệ thống đăng ký trực tuyến sẽ tự động kiểm soát điều này.
+
+2. Quy định về khối lượng tín chỉ tối đa
+Đây là quy định quan trọng nhất bạn cần nắm để đăng ký học vượt:
+
+Trong học kỳ chính: Sinh viên được đăng ký khối lượng học tập tối đa không vượt quá 3/2 (150%) khối lượng trung bình một học kỳ theo kế hoạch đào tạo chuẩn của ngành.
+
+Ví dụ: Nếu kế hoạch đào tạo chuẩn của ngành bạn là 15 tín chỉ/học kỳ, thì số tín chỉ tối đa bạn được phép đăng ký trong một học kỳ chính là: 15 x 1.5 = 22.5 tín chỉ (thường sẽ làm tròn xuống 22 tín chỉ).
+
+Trong học kỳ phụ (học kỳ hè): Không quy định khối lượng học tập tối thiểu hay tối đa. Đây là cơ hội để bạn học vượt nhiều nhất.
+
+3. Thủ tục đăng ký học vượt
+Việc đăng ký học vượt được thực hiện hoàn toàn thông qua Website Thông tin đào tạo đại học trong các đợt đăng ký học phần chính thức.
+
+Bước 1: Trong thời gian đăng ký học phần, bạn truy cập hệ thống và đăng ký các học phần nằm trong kế hoạch đào tạo của khóa ngành mình.
+
+Bước 2 (Quan trọng): Để học vượt, bạn cần chọn đăng ký thêm các học phần ngoài kế hoạch. Đây là những học phần có trong chương trình đào tạo của ngành bạn nhưng không thuộc kế hoạch đào tạo năm học hiện tại của khóa bạn (tức là các học phần của học kỳ sau).
+
+Hệ thống sẽ tự động kiểm tra các điều kiện về tiên quyết và số lượng tối đa.
+
+4. Một số lưu ý quan trọng khác
+Điều kiện xét học bổng: Để đủ điều kiện xét cấp học bổng khuyến khích học tập, bạn phải đăng ký tối thiểu 15 tín chỉ/học kỳ. Điều quan trọng là chỉ tính những học phần đăng ký lần thứ nhất (bao gồm cả học phần học vượt), không tính học phần học lại hoặc học cải thiện. Vì vậy, học vượt không những không ảnh hưởng mà còn giúp bạn đủ điều kiện xét học bổng.
+
+Sinh viên năm nhất: Trong học kỳ đầu tiên, sinh viên năm nhất không được tự đăng ký học phần. Phòng Đào tạo sẽ biên chế sẵn vào các lớp theo kế hoạch. Do đó, bạn chỉ có thể bắt đầu học vượt từ học kỳ thứ 2 trở đi.
+
+Cân nhắc khối lượng học tập: Học vượt đồng nghĩa với khối lượng kiến thức và áp lực thi cử sẽ tăng lên. Bạn nên cân nhắc kỹ năng lực của bản thân để đảm bảo kết quả học tập chung không bị ảnh hưởng."
+Bảo lưu kết quả khi đi thực tập dài hạn như thế nào?," Quy trình và thủ tục cụ thể
+Bước 1: Viết đơn và chuẩn bị hồ sơ
+
+Viết đơn: Bạn phải viết đơn gửi Hiệu trưởng, trình bày rõ lý do xin nghỉ học tạm thời là ""đi thực tập dài hạn"".
+
+Chuẩn bị giấy tờ chứng minh: Đây là bước QUAN TRỌNG NHẤT. Bạn cần có:
+
+Văn bản/xác nhận của công ty/đơn vị cử bạn đi thực tập dài hạn, nêu rõ thời gian thực tập.
+
+Hợp đồng thực tập hoặc các giấy tờ có giá trị pháp lý tương tự chứng minh cho việc này.
+
+Bước 2: Nộp đơn và xin xác nhận
+
+Bạn nộp đơn kèm theo toàn bộ giấy tờ chứng minh cho:
+
+Khoa chuyên môn của bạn (Ban Chủ nhiệm Khoa) để được xác nhận và có ý kiến.
+
+Sau đó, nộp toàn bộ hồ sơ lên Phòng Đào tạo Đại học & Công tác Sinh viên.
+
+Bước 3: Chờ quyết định từ Hiệu trưởng
+
+Phòng Đào tạo sẽ tổng hợp và trình hồ sơ của bạn lên Hiệu trưởng.
+
+Hiệu trưởng sẽ ra Quyết định cho phép bạn nghỉ học tạm thời. Quyết định này chính là văn bản xác nhận việc bảo lưu kết quả học tập của bạn.
+
+3. Quy trình để trở lại học tập sau thời gian bảo lưu
+Khi kết thúc đợt thực tập và muốn trở lại trường, bạn cần:
+
+Viết đơn xin trở lại học tiếp gửi Hiệu trưởng.
+
+Nộp đơn ít nhất một tuần trước khi học kỳ mới bắt đầu.
+
+Hiệu trưởng sẽ ban hành Quyết định cho phép bạn nhập học trở lại.
+
+Tóm tắt các bước thực tế bạn cần làm:
+Liên hệ sớm với Khoa và Phòng Đào tạo: Ngay khi có kế hoạch thực tập, hãy đến gặp Cố vấn học tập (CVHT) và Phòng Đào tạo Đại học & Công tác Sinh viên để được hướng dẫn cụ thể nhất về thủ tục và thời gian.
+
+Chuẩn bị hồ sơ: Viết đơn và xin giấy xác nhận thực tập dài hạn từ công ty.
+
+Nộp hồ sơ đúng hạn: Nộp đơn và giấy tờ cho Khoa và Phòng Đào tạo trong vòng 4 tuần đầu của học kỳ.
+
+Nhận Quyết định nghỉ học: Chờ và nhận Quyết định chính thức từ Hiệu trưởng. Giữ cẩn thận quyết định này.
+
+Làm thủ tục trở lại học: Khi hết hạn thực tập, làm đơn xin đi học lại trước kỳ học mới.
+
+Lưu ý quan trọng:
+
+Thời gian nghỉ học tạm thời vì lý do cá nhân vẫn được tính vào thời gian học tập tối đa cho phép của khóa học (theo khoản 3, Điều 9). Bạn cần lên kế hoạch để đảm bảo hoàn thành chương trình đúng hạn.
+
+Việc có được chấp nhận hay không phụ thuộc rất lớn vào tính chất ""chính đáng"" của lý do và giấy tờ chứng minh đầy đủ.
+
+Bạn nên chủ động liên hệ với Phòng Đào tạo Đại học & Công tác Sinh viên của trường để được hướng dẫn chi tiết và chính xác nhất cho trường hợp cụ thể của mình.
+
+Chúc bạn thực hiện thủ tục thành công và có một kỳ thực tập bổ ích!"
+Vi phạm quy chế thi bị xử lý thế nào?,"A. Các Hình Thức Kỷ Luật (Điều 9, Quy chế Công tác Sinh viên)
+Sinh viên vi phạm có thể bị áp dụng một trong các hình thức kỷ luật sau, từ nhẹ đến nặng:
+
+Khiển trách
+
+Cảnh cáo
+
+Đình chỉ học tập có thời hạn (một học kỳ, một năm học, hoặc theo thời gian bản án treo)
+
+Buộc thôi học
+
+B. Các Hành Vi Vi Phạm Cụ Thể và Mức Xử Lý (Theo Phụ lục)
+Dưới đây là các lỗi thi cử phổ biến và khung hình thức kỷ luật tương ứng. Số lần vi phạm được tính trong toàn bộ khóa học.
+
+STT	Hành Vi Vi Phạm	Khiển trách	Cảnh cáo	Đình chỉ học tập	Buộc thôi học	Ghi chú
+4	Thi/kiểm tra thay hoặc nhờ người thi/kiểm tra thay; Làm thay, nhờ làm hoặc sao chép tiểu luận, đồ án, khóa luận tốt nghiệp.			Lần 1	Lần 2	Xử lý theo quy chế đào tạo. Đây là lỗi rất nặng.
+5	Tổ chức học, thi, kiểm tra thay; tổ chức làm thay tiểu luận, đồ án, khóa luận.				Lần 1	Tùy mức độ có thể bị giao cho cơ quan chức năng xử lý theo pháp luật.
+6	Mang tài liệu vào phòng thi; đưa đề thi ra ngoài nhờ làm thay; ném tài liệu vào phòng thi; vẽ bậy vào bài thi.		Cảnh cáo			Xử lý theo quy chế đào tạo, hạ một bậc điểm rèn luyện và không quá mức Khá.
+(Các lỗi khác)	Đến muộn, mất trật tự, làm việc riêng...	(Xử lý trừ điểm rèn luyện)				Trừ 5 điểm/lần vào điểm rèn luyện.
+C. Hậu Quả Kèm Theo
+Ngoài hình thức kỷ luật chính, việc vi phạm quy chế thi còn kéo theo những hậu quả nặng nề khác:
+
+Đối với học phần bị vi phạm:
+
+Sinh viên sẽ bị hủy kết quả thi của học phần đó và nhận điểm 0 (F) cho học phần. Bắt buộc phải đăng ký học lại.
+
+Đối với điểm rèn luyện:
+
+Bị trừ điểm rèn luyện rất nặng (theo Phụ lục đánh giá điểm rèn luyện):
+
+Vi phạm bị khiển trách: Trừ -4 điểm/lần.
+
+Vi phạm bị cảnh cáo: Trừ -6 điểm/lần.
+
+Vi phạm bị đình chỉ thi học phần: Trừ -10 điểm/lần.
+
+Điều này ảnh hưởng trực tiếp đến xếp loại rèn luyện, từ đó mất quyền lợi xét học bổng, khen thưởng.
+
+Ảnh hưởng đến khen thưởng:
+
+Sinh viên bị kỷ luật từ khiển trách trở lên sẽ không được xét khen thưởng trong học kỳ/năm học đó.
+
+Thời hạn chấm dứt hiệu lực kỷ luật:
+
+Khiển trách: Sau 03 tháng không tái phạm thì được chấm dứt hiệu lực (nhưng vẫn lưu hồ sơ).
+
+Cảnh cáo: Sau 06 tháng không tái phạm thì được chấm dứt hiệu lực (nhưng vẫn lưu hồ sơ).
+
+Nguy cơ bị buộc thôi học:
+
+Theo Điều 20, Quy chế Đào tạo, sinh viên bị kỷ luật lần thứ hai vì lý do thi hộ hoặc bị kỷ luật ở mức xoá tên khỏi danh sách sinh viên sẽ bị buộc thôi học.
+
+Tóm tắt quy trình xử lý kỷ luật (Điều 10):
+Lập biên bản: Giảng viên, cán bộ coi thi lập biên bản về hành vi vi phạm.
+
+Tự kiểm điểm: Sinh viên vi phạm phải viết bản tự kiểm điểm (nếu không viết vẫn bị xử lý).
+
+Họp lớp: Trợ lý Cố vấn học tập chủ trì họp lớp để phân tích và đề xuất hình thức kỷ luật.
+
+Khoa xét duyệt: Khoa chuyên môn họp, xét và gửi danh sách lên Phòng Công tác HSSV.
+
+Hội đồng kỷ luật: Hội đồng khen thưởng & kỷ luật sinh viên của trường họp để xét và đề xuất hình thức kỷ luật cuối cùng.
+
+Quyết định kỷ luật: Hiệu trưởng ra quyết định kỷ luật bằng văn bản. Quyết định này được thông báo cho gia đình và lưu vào hồ sơ sinh viên."
+Chuyển ngành cần tiêu chí nào?,"A. Các Điều Kiện Bắt Buộc Để Được Xét Chuyển Ngành
+Theo Quy chế, bạn phải đồng thời đáp ứng TẤT CẢ các điều kiện sau đây:
+
+1. Điều kiện về thời gian và tình trạng học tập:
+
+KHÔNG đang là sinh viên năm thứ nhất hoặc sinh viên năm cuối khóa.
+
+KHÔNG thuộc diện đang bị xem xét buộc thôi học.
+
+Vẫn còn đủ thời gian học tập theo quy định (thời gian tối đa bằng 2 lần thời gian thiết kế của chương trình).
+
+2. Điều kiện về đầu vào:
+
+Bạn phải đạt điều kiện trúng tuyển của ngành muốn chuyển đến trong cùng khóa tuyển sinh mà bạn đã đậu vào trường.
+
+Ví dụ: Bạn đỗ vào ngành A năm 2023 với điểm chuẩn là 25. Ngành B cùng khóa 2023 có điểm chuẩn là 26. Bạn phải có tổng điểm thi ĐH (theo thang điểm và tổ hợp xét tuyển của ngành B) từ 26 trở lên thì mới đủ điều kiện chuyển sang ngành B.
+
+3. Điều kiện về năng lực đào tạo của ngành mới:
+
+Ngành bạn muốn chuyển đến phải còn chỉ tiêu, có đủ các điều kiện bảo đảm chất lượng và chưa vượt quá năng lực đào tạo theo quy định.
+
+4. Điều kiện về sự đồng ý:
+
+Phải có sự đồng ý bằng văn bản của:
+
+Trưởng Khoa quản lý ngành bạn đang học (nơi chuyển đi).
+
+Trưởng Khoa quản lý ngành bạn muốn chuyển đến.
+
+Hiệu trưởng Trường Đại học Khoa học.
+
+B. Quy Trình & Thủ Tục Chuyển Ngành Cụ Thể
+Bước 1: Chuẩn bị hồ sơ
+
+Viết đơn xin chuyển ngành theo mẫu của trường.
+
+Bước 2: Xin ý kiến và xác nhận
+
+Nộp đơn để lấy ý kiến đồng ý của Khoa quản lý ngành bạn đang học.
+
+Nộp đơn để lấy ý kiến đồng ý của Khoa quản lý ngành bạn muốn chuyển đến.
+
+Bước 3: Nộp hồ sơ và chờ quyết định
+
+Nộp đơn đã có xác nhận của hai khoa lên Phòng Đào tạo Đại học & Công tác Sinh viên.
+
+Hiệu trưởng sẽ xem xét và ra quyết định cuối cùng.
+
+Đối với sinh viên chính quy, Giám đốc Đại học Huế sẽ là người ban hành quyết định chính thức.
+
+Đối với sinh viên vừa làm vừa học, Hiệu trưởng Trường Đại học Khoa học sẽ ban hành quyết định.
+
+C. Vấn Đề Bảo Lưu Kết Quả Học Tập
+Khi chuyển ngành, bạn có quyền đề nghị xem xét bảo lưu kết quả của những học phần đã học ở ngành cũ mà có nội dung, khối lượng kiến thức phù hợp với chương trình đào tạo của ngành mới.
+
+Việc này do Hiệu trưởng quyết định trên cơ sở tư vấn của Hội đồng chuyển điểm của ngành đào tạo mới. Không phải tất cả các học phần đã học đều được công nhận.
+
+Tóm tắt các bước thực tế bạn cần làm:
+Tự đánh giá điều kiện: Kiểm tra xem mình có thuộc diện được chuyển ngành không (không phải năm 1, năm cuối) và điểm đầu vào của mình có đủ cho ngành mới mong muốn không.
+
+Liên hệ với Phòng Đào tạo: Đây là bước quan trọng đầu tiên. Hãy đến Phòng Đào tạo Đại học & Công tác Sinh viên để:
+
+Hỏi về danh sách các ngành được phép chuyển đến trong năm học đó.
+
+Hỏi về chỉ tiêu tiếp nhận của ngành bạn muốn chuyển.
+
+Lấy mẫu đơn và hướng dẫn cụ thể.
+
+Gặp Khoa quản lý ngành mới: Tiếp xúc với Khoa quản lý ngành bạn muốn chuyển đến để tìm hiểu về chương trình đào tạo, cơ hội việc làm và xin ý kiến đồng ý.
+
+Chuẩn bị và nộp hồ sơ: Hoàn tất đơn xin và xin chữ ký xác nhận từ Khoa cũ và Khoa mới, sau đó nộp về Phòng Đào tạo.
+
+Theo dõi kết quả: Chờ quyết định chính thức từ Hiệu trưởng/Giám đốc Đại học Huế.
+
+Lời khuyên: Bạn nên chủ động và thực hiện sớm, tốt nhất là vào cuối học kỳ hoặc đầu năm học để kịp thời gian xét duyệt và sắp xếp kế hoạch học tập mới. Việc chuyển ngành thành công phụ thuộc rất lớn vào sự đồng ý của Khoa tiếp nhận và điều kiện đầu vào của bạn."
+Vắng bao nhiêu buổi thì bị cấm thi?," Quy Định Về Điểm Chuyên Cần & Điều Kiện Dự Thi
+Theo Điều 30, Khoản 2c về đánh giá học phần thực hành, có một quy định rất rõ cho thấy tầm quan trọng của việc đi học đầy đủ:
+
+""c) Đối với các học phần thực hành: sinh viên phải tham dự tất cả các bài thực hành có trong học phần. ... Trường hợp sinh viên không đủ điểm đánh giá các bài thực hành để tính điểm cuối cùng thì học phần đó bị điểm 0 (không) và sinh viên phải đăng ký học lại;""
+
+Phân tích:
+
+Đối với các học phần thực hành, thí nghiệm, nếu bạn vắng mặt và không có lý do chính đáng để được bố trí thực hành bù, bạn sẽ không có điểm đánh giá. Hệ quả là bạn không đủ điều kiện để có điểm học phần và coi như không thể thi (vì đã bị điểm 0 ngay từ đầu).
+
+Đối với các học phần lý thuyết, quy chế không ghi rõ tỷ lệ vắng bao nhiêu thì bị cấm thi. Tuy nhiên, điểm chuyên cần là một trong những cột điểm thành phần của điểm quá trình. Nếu bạn vắng quá nhiều, điểm chuyên cần của bạn sẽ bằng 0 hoặc rất thấp, kéo theo điểm quá trình thấp và có nguy cơ trượt học phần.
+
+2. Quyền Quyết Định Của Giảng Viên
+Vì quy chế không quy định một con số cụ thể, nên tiêu chuẩn để được dự thi thường được quy định trong Đề cương chi tiết học phần do giảng viên phụ trách biên soạn và được Hiệu trưởng phê duyệt.
+
+Bạn PHẢI kiểm tra Đề cương chi tiết học phần ngay từ đầu kỳ. Trong đó, mục ""Nội dung và phương pháp kiểm tra đánh giá"" sẽ ghi rõ:
+
+Trọng số điểm chuyên cần.
+
+Quy định về việc vắng mặt (ví dụ: vắng quá 20% tổng số buổi học sẽ không được dự thi, hoặc bị trừ bao nhiêu điểm vào điểm chuyên cần cho mỗi buổi vắng).
+
+3. Trường Hợp Bị Cấm Thi Do Lý Do Hành Chính
+Có một trường hợp bị cấm thi được quy định rõ tại Điều 31, Khoản 4:
+
+""Sinh viên vắng mặt trong kỳ thi học phần, nếu không có lý do chính đáng hoặc sinh viên bị cấm thi do không đóng học phí đúng thời gian quy định coi như đã dự thi và phải nhận điểm 0 (không)...""
+
+Vậy, không đóng học phí đúng hạn là một lý do rõ ràng để bị cấm thi.
+
+Tóm tắt & Hướng Dẫn Thực Tế Cho Bạn:
+Không có quy định chung: Không có con số chung cho tất cả các học phần về số buổi vắng dẫn đến cấm thi.
+
+Kiểm tra Đề cương chi tiết: Đây là bước QUAN TRỌNG NHẤT. Hãy tìm và đọc kỹ Đề cương chi tiết của từng học phần để biết quy định cụ thể về chuyên cần.
+
+Tuân thủ theo thông báo của Giảng viên: Giảng viên phụ trách học phần sẽ là người trực tiếp thông báo quy định về chuyên cần và điều kiện dự thi trong buổi học đầu tiên. Hãy lắng nghe và ghi chú cẩn thận.
+
+Với học phần Thực hành: Phải tham dự đầy đủ. Vắng mặt không có lý do chính đáng đồng nghĩa với việc không đủ điều kiện thi.
+
+Đóng học phí đúng hạn: Đảm bảo bạn đã hoàn thành học phí để không bị cấm thi vì lý do hành chính.
+
+Lời khuyên: Hãy chủ động hỏi trực tiếp giảng viên phụ trách học phần hoặc trợ lý học tập của lớp về quy định chuyên cần và điều kiện dự thi để có thông tin chính xác nhất cho từng môn học. Đừng để đến sát kỳ thi mới phát hiện ra mình không đủ điều kiện."
+Đăng ký học phần ở đâu và khi nào?,"1. ĐĂNG KÝ Ở ĐÂU?
+Tất cả sinh viên (trừ một số trường hợp đặc biệt) sẽ đăng ký học phần trực tuyến thông qua:
+
+Website Thông tin đào tạo đại học của Trường: http://ums.husc.edu.vn
+
+Bạn sẽ sử dụng tài khoản cá nhân do trường cung cấp để đăng nhập và thực hiện đăng ký.
+
+Ngoại lệ:
+
+Sinh viên năm thứ nhất, học kỳ đầu tiên: KHÔNG phải tự đăng ký. Phòng Đào tạo sẽ tự động biên chế sinh viên vào các lớp học phần theo kế hoạch.
+
+Sinh viên hệ vừa làm vừa học: Sẽ không đăng ký qua mạng. Phòng Đào tạo sẽ biên chế sinh viên vào danh sách lớp theo khóa - ngành.
+
+2. ĐĂNG KÝ KHI NÀO?
+Việc đăng ký học phần được thực hiện theo một lịch trình cố định hàng học kỳ, kéo dài 02 tuần và được chia làm 2 giai đoạn:
+
+Giai đoạn 1: Tuần đăng ký chính thức
+
+Thời gian: 01 tuần (thời gian cụ thể được công bố trong Sổ tay học vụ của từng học kỳ).
+
+Công việc: Sinh viên đăng ký khối lượng học tập qua website ums.husc.edu.vn.
+
+Giai đoạn 2: Tuần điều chỉnh đăng ký
+
+Thời gian: 01 tuần ngay sau tuần đăng ký chính thức.
+
+Công việc:
+
+Sinh viên tiếp tục đăng ký bổ sung các lớp học phần còn chỗ.
+
+Chỉ trong tuần này, bạn mới được nộp đơn (theo mẫu) lên Phòng Đào tạo Đại học & Công tác Sinh viên để đề nghị:
+
+Chuyển lớp (nếu bị trùng lịch học).
+
+Đăng ký vào lớp đã đầy (khi có sự đồng ý của Phòng Đào tạo).
+
+Rút bớt học phần đã đăng ký."
+Điều kiện mở lớp ghép cho sinh viên ít người học là gì?,Điều này sẽ tùy theo tình trạng của từng lớp học phần mà bạn đăng ký xem đã đủ sinh viên hay thiếu sinh không đạt chỉ tiêu mở lớp hay quá số lượng sinh viên quy định theo từng học phần.
+Lịch đăng ký học phần bị lỗi hệ thống thì xử lý ra sao?,"Theo kinh nghiệm của mình thì bạn nên chờ trường khắc phục hoặc liên hệ trực tiếp như vào hỏi phòng đào tạo để biết chi tiết hơn các lỗi đăng kí , hủy học phần, bổ sung học phần....vv."
+Học song ngành đăng ký ra sao?,"Quy trình đăng ký
+Sau khi đảm bảo các điều kiện trên, bạn cần thực hiện các bước sau:
+
+Chuẩn bị hồ sơ:
+
+Đơn xin học chương trình thứ hai (theo mẫu của trường).
+
+Bảng điểm kết quả học tập của chương trình thứ nhất (tính đến thời điểm đăng ký) để chứng minh điều kiện học lực.
+
+Nộp hồ sơ: Gửi toàn bộ hồ sơ lên Hiệu trưởng để xem xét và quyết định.
+
+Chờ quyết định: Hiệu trưởng sẽ ban hành Quyết định cho phép bạn học chương trình thứ hai nếu hồ sơ hợp lệ.
+
+3. Những lưu ý quan trọng khi học song ngành
+Thời gian tối đa: Thời gian tối đa được phép để hoàn thành cả hai chương trình bằng thời gian tối đa quy định cho chương trình thứ nhất.
+
+Bảo lưu điểm: Bạn có thể được bảo lưu điểm của những học phần có nội dung tương đương trong chương trình thứ nhất. Việc này do Hiệu trưởng quyết định dựa trên tư vấn của Hội đồng chuyển điểm.
+
+Điều kiện tốt nghiệp:
+
+Bạn chỉ được xét tốt nghiệp chương trình thứ hai nếu đã có đủ điều kiện tốt nghiệp ở chương trình thứ nhất.
+
+Bạn phải học chương trình thứ hai ít nhất 02 năm trước khi xét tốt nghiệp.
+
+Học bổng và khen thưởng: Kết quả học tập ở chương trình thứ hai sẽ không được dùng để xét học bổng và các hình thức khen thưởng khác (trừ xét khen thưởng dựa trên kết quả tốt nghiệp).
+
+Các chế độ khác: Bạn sẽ không được hưởng các chế độ miễn giảm học phí và các chính sách xã hội khác khi học chương trình thứ hai.
+
+Tóm tắt các bước thực tế để bạn thực hiện:
+Kiểm tra điều kiện: Đảm bảo bạn đã học hết năm nhất, có GPA đạt yêu cầu và ngành bạn muốn học có tuyển sinh.
+
+Liên hệ Phòng Đào tạo: Đến Phòng Đào tạo Đại học & Công tác Sinh viên để được tư vấn cụ thể về ngành học, lấy mẫu đơn và hướng dẫn chi tiết nhất.
+
+Chuẩn bị và nộp hồ sơ: Hoàn thiện đơn và bảng điểm, nộp về đúng nơi quy định.
+
+Theo dõi kết quả: Chờ quyết định chính thức từ Hiệu trưởng.
+
+Lời khuyên: Bạn nên trực tiếp liên hệ với Phòng Đào tạo Đại học & Công tác Sinh viên của trường để nhận được thông tin chính xác nhất về các ngành được phép đào ký học song ngành, thời gian nộp đơn cụ thể và được giải đáp mọi thắc mắc chi tiết.
+
+Hy vọng thông tin này hữu ích với bạn! Chúc bạn sớm đăng ký thành công và hoàn thành tốt cả hai chương trình học."
+Đăng ký thể chất ở đâu?,Để đăng kí học giáo dục thể chất bạn vui lòng theo dõi trên fanpage của Đại học thể chất đây là link: https://fpe.hueuni.edu.vn/index.php/vi  và link facebook:https://www.facebook.com/gdtcdhh.
+Mình bị đình chỉ vì sử dụng tài liệu để gian lận thì có sao không?,Thì phải phải gì PHẢI CHỊUUUUU....ĐỪNG CÓ KÊU!!!
+Nộp học phí thể chất ở đâu?,"Bạn truy cập vào link này nha: http://thuhocphifpe.hueuni.edu.vn/View/Login.aspx?ReturnUrl=%2fView%2fDashBoard.aspx .Sau đó bạn điền mã sinh viên, mật khẩu( cũng là mã sinh viên) sau đó đăng nhập, tiếp theo bạn vào mục Nộp học phí là sẽ ra các khoảng phí mà bạn cần nộp."
+Có bao nhiêu học phần cần học ở trường thể chất?,"Cái này thì tùy từng kỳ học mà bạn đăng kí nhưng thông thường sẽ là 4 học phần gồm 2 bắt buộc và 2 tự chọn , nếu muốn biết kỹ hơn bạn thể vào trang thông tin của đại học thể chất huế á."
+Trường mình có confessions không?,Có nha link face đây nha: https://www.facebook.com/KhoaHocHueConfessions
+Học quân sự diễn ra như nào?,"Học quân sự sẽ diễn ra vào năm 2 tầm khoảng tháng 4 đến tháng 5 ( tùy vào thông báo), thời gian học kéo dài tầm 1 tháng và phải nộp lệ phí ăn uống theo quy định của khu quân sự, địa điểm: Khu quân sự Phú Bài 161 Nguyễn Khoa Văn, Huong Thuy, Vietnam."
+Lệ phí tốt nghiệp là bao nhiêu?,Thông thường bạn phải nộp rơi vào khoảng 200.000 lệ phí tốt nghiệp
+,
+,
+,
+,
+,0

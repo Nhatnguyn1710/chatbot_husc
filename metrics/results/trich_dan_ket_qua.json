@@ -1,0 +1,138 @@
+{
+  "summary": {
+    "citation_precision": 0.36666666666666664,
+    "citation_recall": 0.8,
+    "clean_rate": 0.8,
+    "hallucination_rate": 0.19999999999999996,
+    "total_fabricated": 0,
+    "avg_fabricated_per_query": 0.0
+  },
+  "category_metrics": {
+    "implicit": {
+      "count": 1,
+      "citation_precision": 0.0,
+      "citation_recall": 1.0,
+      "clean_rate": 1.0
+    },
+    "crossref": {
+      "count": 1,
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "clean_rate": 1.0
+    },
+    "specific": {
+      "count": 3,
+      "citation_precision": 0.27777777777777773,
+      "citation_recall": 0.6666666666666666,
+      "clean_rate": 0.6666666666666666
+    }
+  },
+  "details": [
+    {
+      "query": "Điều 43 quy định gì?",
+      "category": "specific",
+      "cited_articles": [
+        "36",
+        "43",
+        "42"
+      ],
+      "must_cite": [
+        "43"
+      ],
+      "must_not_cite": [
+        "36",
+        "99"
+      ],
+      "citation_precision": 0.3333333333333333,
+      "citation_recall": 1.0,
+      "is_clean": false,
+      "fabricated": [],
+      "wrong_citations": [
+        "36"
+      ],
+      "answer_preview": "Theo **Quy chế Học vụ**, Điều 43 quy định về việc cấp bằng tốt nghiệp và các vấn đề liên quan, cụ thể như sau:\n\n### Kết luận ngắn\nĐiều 43 của Quy chế Học vụ quy định về thẩm quyền cấp bằng, cách thức ...",
+      "latency_ms": 21539.327700000285
+    },
+    {
+      "query": "Nội dung Điều 36 là gì?",
+      "category": "specific",
+      "cited_articles": [],
+      "must_cite": [
+        "36"
+      ],
+      "must_not_cite": [
+        "43",
+        "99"
+      ],
+      "citation_precision": 0.0,
+      "citation_recall": 0.0,
+      "is_clean": true,
+      "fabricated": [],
+      "wrong_citations": [],
+      "answer_preview": "Theo thông tin được cung cấp, ***(Theo quy định hiện hành** của **Quy chế Học vụ** quy định về **Cách tính điểm trung bình chung**.\n\n### Căn cứ chính\nTheo **Quy chế Học vụ**, *(Theo quy định hiện hành...",
+      "latency_ms": 18996.770699999615
+    },
+    {
+      "query": "Điều 20 quy định cảnh báo học vụ thế nào?",
+      "category": "specific",
+      "cited_articles": [
+        "9",
+        "20"
+      ],
+      "must_cite": [
+        "20"
+      ],
+      "must_not_cite": [
+        "99"
+      ],
+      "citation_precision": 0.5,
+      "citation_recall": 1.0,
+      "is_clean": true,
+      "fabricated": [],
+      "wrong_citations": [],
+      "answer_preview": "Theo **Quy chế Học vụ**, Điều 20 quy định về cảnh báo kết quả học tập và buộc thôi học như sau:\n\n### Cảnh báo học tập\nCảnh báo học tập được thực hiện theo từng học kỳ nhằm giúp sinh viên có kết quả họ...",
+      "latency_ms": 17658.454000000347
+    },
+    {
+      "query": "Giảm hạng tốt nghiệp khi bị kỷ luật?",
+      "category": "crossref",
+      "cited_articles": [
+        "43"
+      ],
+      "must_cite": [
+        "43"
+      ],
+      "must_not_cite": [],
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "is_clean": true,
+      "fabricated": [],
+      "wrong_citations": [],
+      "answer_preview": "### Kết luận ngắn\nSinh viên có hạng tốt nghiệp loại xuất sắc hoặc giỏi sẽ bị giảm đi một mức nếu đã bị kỷ luật từ mức cảnh cáo trở lên trong thời gian học.\n\n### Căn cứ chính\nTheo **Quy chế Học vụ**, C...",
+      "latency_ms": 15516.26000000033
+    },
+    {
+      "query": "Làm sao để bảo lưu kết quả?",
+      "category": "implicit",
+      "cited_articles": [
+        "9",
+        "26"
+      ],
+      "must_cite": [],
+      "must_not_cite": [
+        "99",
+        "88",
+        "77"
+      ],
+      "citation_precision": 0.0,
+      "citation_recall": 1.0,
+      "is_clean": true,
+      "fabricated": [],
+      "wrong_citations": [],
+      "answer_preview": "Để bảo lưu kết quả học tập tại HUSC, sinh viên cần thực hiện quy trình xin nghỉ học tạm thời với các bước cụ thể như sau:\n\n### Kết luận ngắn\nSinh viên muốn bảo lưu kết quả học tập cần làm đơn xin nghỉ...",
+      "latency_ms": 31533.110599999418
+    }
+  ],
+  "test_count": 5,
+  "_elapsed_seconds": 105.25
+}
