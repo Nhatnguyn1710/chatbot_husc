@@ -41,8 +41,8 @@ flowchart TD
 
     INTENT -->|Small talk / out of scope| DIRECT[Direct response]
     INTENT -->|Academic query| CACHE[Answer cache check]
-    CACHE -->|Hit| RESPONSE[Return answer]
-    CACHE -->|Miss| PIPE[RAG pipeline]
+    CACHE -->|Cache hit: reuse answer| RESPONSE[Return answer]
+    CACHE -->|Cache miss: run retrieval| PIPE[RAG pipeline]
 
     PIPE --> HYDE[Optional HyDE expansion]
     HYDE --> DENSE[Dense retrieval<br/>Qdrant or FAISS]
