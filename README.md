@@ -14,51 +14,76 @@ Students often need to search long regulation documents or contact academic offi
 - Flask web UI with login, email OTP registration, password reset, sessions, and chat history.
 - FastAPI RAG service separated from the UI service for cleaner deployment.
 - SQL Server for users and chat history.
-- Qdrant vector database in Docker, with FAISS fallback for local indexing.
+- Qdrant vector database in Docker, with FAISS as a local alternative.
 - Rate limiting, secret handling, answer cache, and model memory optimization.
 - Metrics suite for retrieval, generation, citation, intent classification, and performance.
 
-## Demo Flow
+## Runtime Flow
 
 1. User signs in through the Flask web UI.
 2. The UI saves chat history to SQL Server.
-3. The UI sends academic questions to the FastAPI RAG service.
-4. The RAG service retrieves evidence from `data/QA.csv` and `data/quyche.pdf`.
-5. Gemini generates an answer from the retrieved context.
-6. The answer is post-processed for citation safety and rendered as Markdown/LaTeX in the UI.
+3. The UI sends chat requests to the FastAPI RAG service.
+4. FastAPI applies rate limiting, waits for RAG startup if needed, then calls `rag_core.generate_answer()`.
+5. `rag_core` classifies intent. Small talk and out-of-scope questions return direct responses.
+6. Academic questions use answer cache when eligible; otherwise they go through optional HyDE expansion, hybrid retrieval, reranking, metadata boost, context checks, Gemini generation, citation validation, and Markdown cleanup.
+7. The UI renders the final answer and stores both user and bot messages in SQL Server.
 
 ## Architecture
 
 ```mermaid
 flowchart TD
-    A[Student question] --> B[Flask UI]
-    B --> C[SQL Server chat history]
-    B --> D[FastAPI RAG API]
-    D --> E[Intent classifier]
-    E -->|Small talk or out of scope| F[Direct response]
-    E -->|Academic question| G[Answer cache]
-    G --> H[HyDE query expansion]
-    H --> I[Dense retrieval: Qdrant or FAISS]
-    H --> J[Sparse retrieval: BM25]
-    I --> K[RRF fusion]
-    J --> K
-    K --> L[Cross-encoder reranking]
-    L --> M[Metadata boost and cross-document expansion]
-    M --> N[Context sufficiency check]
-    N --> O[Gemini generation]
-    O --> P[Citation validation and Markdown cleanup]
-    P --> B
+    U[Student] --> UI[Flask UI]
+    UI --> DB[(SQL Server<br/>users + chat history)]
+    UI --> API[FastAPI RAG API]
+    API --> RL[Rate limiter]
+    RL --> RAG[rag_core.generate_answer]
+    RAG --> INTENT[Intent classifier]
 
-    subgraph Data
-        Q[QA.csv]
-        R[quyche.pdf]
+    INTENT -->|Small talk / out of scope| DIRECT[Direct response]
+    INTENT -->|Academic query| CACHE[Answer cache check]
+    CACHE -->|Hit| RESPONSE[Return answer]
+    CACHE -->|Miss| PIPE[RAG pipeline]
+
+    PIPE --> HYDE[Optional HyDE expansion]
+    HYDE --> DENSE[Dense retrieval<br/>Qdrant or FAISS]
+    HYDE --> SPARSE[Sparse retrieval<br/>BM25]
+    DENSE --> FUSION[RRF fusion]
+    SPARSE --> FUSION
+    FUSION --> RERANK[Cross-encoder reranking]
+    RERANK --> BOOST[Metadata boost<br/>+ cross-document expansion]
+    BOOST --> CHECK[Context sufficiency<br/>+ constraint check]
+    CHECK -->|Need more details| CLARIFY[Ask clarification]
+    CHECK -->|Enough evidence| LLM[Gemini generation]
+    LLM --> POST[Citation validation<br/>+ Markdown cleanup]
+    POST --> STORE[Cache answer if eligible]
+    STORE --> RESPONSE
+    DIRECT --> RESPONSE
+    CLARIFY --> RESPONSE
+    RESPONSE --> UI
+
+    subgraph KI[Knowledge Index]
+        RECORDS[Processed records]
+        VECTORS[(Qdrant / FAISS vectors)]
+        BM25[(BM25 index)]
     end
 
-    Q --> I
-    Q --> J
-    R --> I
-    R --> J
+    RECORDS --> VECTORS
+    RECORDS --> BM25
+    VECTORS --> DENSE
+    BM25 --> SPARSE
+
+    subgraph BR[Build / Rebuild]
+        CSV[QA.csv]
+        PDF[quyche.pdf]
+        PARSE[CSV chunking<br/>+ structure-aware PDF parsing]
+    end
+
+    CSV --> PARSE
+    PDF --> PARSE
+    PARSE --> RECORDS
 ```
+
+The diagram separates **runtime retrieval** from **database build/rebuild**. `QA.csv` and `quyche.pdf` are parsed during rebuild to create records, BM25 data, and vector indexes. User questions are then served from those prepared indexes.
 
 ## Tech Stack
 
@@ -67,8 +92,8 @@ flowchart TD
 | UI and auth | Flask, Jinja templates, Flask-Mail, Werkzeug security |
 | API | FastAPI, Uvicorn, Pydantic |
 | RAG | SentenceTransformers, BGE-M3, BM25, CrossEncoder reranker |
-| LLM | Google Gemini |
-| Vector database | Qdrant primary, FAISS fallback |
+| LLM | Google Gemini, default model `gemini-2.5-flash` via `GEMINI_MODEL` |
+| Vector database | Qdrant by default, FAISS as a local alternative |
 | Database | SQL Server, pyodbc |
 | Data processing | pandas, PyMuPDF/PyPDF2, tiktoken |
 | Deployment | Docker, Docker Compose |
@@ -78,22 +103,22 @@ flowchart TD
 
 ```text
 chatbot_husc/
-├── api_chat.py              # FastAPI service for RAG/chat endpoints
-├── flask_UI.py              # Flask web app, auth, sessions, chat history
-├── rag_core.py              # Core RAG engine
-├── intent_classifier.py     # Rule-based intent classifier
-├── rate_limiter.py          # In-memory rate limiter
-├── secrets_manager.py       # Secret loading and optional encryption helpers
-├── docker-compose.yml       # Full Docker deployment
-├── Dockerfile.api           # FastAPI + ML/RAG image
-├── Dockerfile.ui            # Flask UI image
-├── data/
-│   ├── QA.csv               # Curated academic Q&A pairs
-│   └── quyche.pdf           # Official handbook/regulation source
-├── templates/               # Flask HTML templates
-├── static/                  # CSS and image assets
-├── metrics/                 # Evaluation scripts
-└── test_citation_accuracy.py
+|-- api_chat.py              # FastAPI service for RAG/chat endpoints
+|-- flask_UI.py              # Flask web app, auth, sessions, chat history
+|-- rag_core.py              # Core RAG engine
+|-- intent_classifier.py     # Rule-based intent classifier
+|-- rate_limiter.py          # In-memory rate limiter
+|-- secrets_manager.py       # Secret loading and optional encryption helpers
+|-- docker-compose.yml       # Docker deployment for UI, API, SQL Server, Qdrant
+|-- Dockerfile.api           # FastAPI + ML/RAG image
+|-- Dockerfile.ui            # Flask UI image
+|-- data/
+|   |-- QA.csv               # Curated academic Q&A pairs
+|   `-- quyche.pdf           # Handbook/regulation source
+|-- templates/               # Flask HTML templates
+|-- static/                  # CSS and image assets
+|-- metrics/                 # Evaluation scripts
+`-- test_citation_accuracy.py
 ```
 
 ## Main Features
@@ -103,13 +128,15 @@ chatbot_husc/
 - Builds searchable records from CSV Q&A and PDF regulations.
 - Parses PDF structure into document families, page ranges, chapters, sections, articles, and clauses.
 - Combines dense and sparse retrieval with Reciprocal Rank Fusion.
-- Uses reranking and metadata boosts for article/clause-specific queries.
+- Uses cross-encoder reranking and metadata boosts for article/clause-specific queries.
 - Adds cross-document context when a regulation references another article.
+- Uses optional HyDE query expansion for short or vague academic queries.
 
 ### Answer Quality and Safety
 
 - Checks whether retrieved context is sufficient before calling the LLM.
 - Asks clarification when an article number appears in multiple document families.
+- Checks selected apply/exclusion constraints for decision-style scholarship and graduation questions.
 - Validates generated citations against retrieved context.
 - Avoids fabricating article/chapter numbers when evidence is missing.
 - Supports Markdown tables and LaTeX formulas in chatbot answers.
@@ -178,6 +205,8 @@ docker compose up -d --build
 ```
 
 The first build can take a while because the API image installs ML dependencies and downloads embedding models on first use.
+
+The API starts the RAG initialization in the background. On the first run, give the API time to load or rebuild indexes before sending chat requests.
 
 5. Open the app.
 
@@ -301,7 +330,7 @@ data/QA.csv
 data/quyche.pdf
 ```
 
-and creates vector/BM25 indexes. Generated index files such as `.pkl` or `.faiss` are intentionally ignored by Git.
+and creates records, BM25 data, and Qdrant/FAISS vector indexes. Generated index files such as `.pkl` or `.faiss` are intentionally ignored by Git.
 
 ## Evaluation
 
@@ -331,6 +360,19 @@ Some generation, citation, and performance metrics require a working Gemini API 
 - The repository includes `.env.example` and `.env.docker.example` only as templates.
 - If an API key was ever pushed publicly, revoke and rotate it before redeploying.
 - Generated caches, logs, local virtual environments, and vector indexes are ignored.
+
+## Production Deployment Notes
+
+For a public deployment, use the Docker setup as the base and add the following operational safeguards:
+
+- Put the Flask UI behind a reverse proxy such as Nginx or a cloud load balancer.
+- Serve traffic over HTTPS and set `SESSION_COOKIE_SECURE=true`.
+- Use strong values for `SECRET_KEY`, `DB_PASSWORD`, `ADMIN_PASSWORD`, and SMTP credentials.
+- Store secrets in environment variables or a secret manager, not in source code.
+- Use persistent volumes for SQL Server and Qdrant data.
+- Restrict direct public access to SQL Server, Qdrant, and the FastAPI service when possible.
+- Rotate the Gemini API key if it was ever exposed.
+- Rebuild the RAG database after changing `data/QA.csv` or `data/quyche.pdf`.
 
 ## Current Limitations
 
