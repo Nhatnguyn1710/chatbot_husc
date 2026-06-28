@@ -1,0 +1,7 @@
+# Flask UI service only (no ML / RAG stack)
+Flask>=3.1.0
+pyodbc>=5.3.0
+Werkzeug>=3.1.0
+Flask-Mail>=0.10.0
+python-dotenv>=1.1.0
+requests>=2.32.0

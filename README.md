@@ -166,21 +166,30 @@ cd C:\Users\User\Downloads\chatbot_husc && call st_env\Scripts\activate && start
 
 ## Docker Deployment
 
+### Prerequisites
+- Docker Desktop (or Docker Engine + Compose v2)
+- Copy `data/quyche.pdf` into `data/` if you need full PDF retrieval (CSV-only works without it)
+- First build may take 15–30 minutes (PyTorch + embedding models)
+
 ### 1. Prepare environment file
 ```bash
-cp .env.docker.example .env.docker
+cp .env.docker.example .env
 ```
 
-Update at least these values in `.env.docker`:
-- `SECRET_KEY`
-- `GEMINI_API_KEY`
-- `DB_PASSWORD` (must satisfy SQL Server strong password policy)
-- `MAIL_USERNAME`, `MAIL_PASSWORD` (if email features are enabled)
+Update at least these values in `.env`:
+- `SECRET_KEY` — long random string for Flask sessions
+- `GEMINI_API_KEY` — Google Gemini API key
+- `DB_PASSWORD` — strong password (upper + lower + number + symbol, 8+ chars); used by both SQL Server and the UI
+- `MAIL_USERNAME`, `MAIL_PASSWORD` (optional, for email verification)
 
 ### 2. Build and start all services
 ```bash
 docker compose up -d --build
 ```
+
+Images are split for production:
+- `Dockerfile.api` — FastAPI + RAG/ML stack (~heavy, first build 15–30 min)
+- `Dockerfile.ui` — Flask UI + SQL Server ODBC only (~light, builds in minutes)
 
 Services:
 - `husc_ui` (Flask UI): `http://localhost:5000`
@@ -188,10 +197,14 @@ Services:
 - `husc_qdrant` (Vector DB): `http://localhost:6333`
 - `husc_sqlserver` (SQL Server): `localhost:1433`
 
+The UI waits for SQL Server healthcheck before starting. On first run, allow ~1 minute for SQL Server to become ready.
+
 ### 3. Check logs/health
 ```bash
+docker compose ps
 docker compose logs -f api
 docker compose logs -f ui
+curl http://localhost:8000/status
 ```
 
 ### 4. Stop services

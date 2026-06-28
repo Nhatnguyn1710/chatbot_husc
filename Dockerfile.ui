@@ -9,7 +9,6 @@ WORKDIR /app
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        build-essential \
         ca-certificates \
         curl \
         gnupg2 \
@@ -21,15 +20,15 @@ RUN apt-get update \
     && ACCEPT_EULA=Y apt-get install -y --no-install-recommends msodbcsql18 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt /app/requirements.txt
+COPY requirements-ui.txt /app/requirements.txt
 
 RUN pip install --upgrade pip setuptools wheel \
     && pip install -r /app/requirements.txt
 
-COPY . /app
+COPY flask_UI.py /app/
+COPY templates/ /app/templates/
+COPY static/ /app/static/
 
-ENV HF_HOME=/app/.cache/huggingface \
-    TRANSFORMERS_CACHE=/app/.cache/huggingface \
-    SENTENCE_TRANSFORMERS_HOME=/app/.cache/huggingface
+EXPOSE 5000
 
-EXPOSE 5000 8000
+CMD ["python", "flask_UI.py"]

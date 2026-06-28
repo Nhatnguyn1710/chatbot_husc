@@ -3602,6 +3602,13 @@ def build_database() -> bool:
     return _get_default_engine().build_database()
 
 
+def rebuild_database() -> bool:
+    """Force full rebuild (recreate Qdrant collection when applicable)."""
+    engine = _get_default_engine()
+    engine.config.qdrant_recreate_on_build = True
+    return engine.build_database()
+
+
 def load_database() -> tuple[list[dict], Any]:
     """Load database using default engine."""
     return _get_default_engine().load_database()

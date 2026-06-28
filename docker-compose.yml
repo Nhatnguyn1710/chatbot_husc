@@ -3,9 +3,15 @@ services:
     image: qdrant/qdrant:v1.15.4
     container_name: husc_qdrant
     ports:
-      - "6333:6333"
+      - "${QDRANT_HOST_PORT:-6333}:6333"
     volumes:
       - qdrant_storage:/qdrant/storage
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/127.0.0.1/6333'"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
     restart: unless-stopped
 
   sqlserver:
@@ -15,15 +21,21 @@ services:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "1433:1433"
+      - "${SQLSERVER_HOST_PORT:-1433}:1433"
     volumes:
       - sqlserver_data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q \"SELECT 1\" || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
     restart: unless-stopped
 
   api:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.api
     container_name: husc_api
     command: python api_chat.py
     env_file:
@@ -35,9 +47,20 @@ services:
       QDRANT_URL: http://qdrant:6333
       QDRANT_RECREATE_ON_BUILD: "false"
     depends_on:
-      - qdrant
+      qdrant:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/status',timeout=10)\"",
+        ]
+      interval: 15s
+      timeout: 12s
+      retries: 20
+      start_period: 120s
     ports:
-      - "8000:8000"
+      - "${API_HOST_PORT:-8000}:8000"
     volumes:
       - hf_cache:/app/.cache/huggingface
       - ./data:/app/data
@@ -47,7 +70,7 @@ services:
   ui:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.ui
     container_name: husc_ui
     command: python flask_UI.py
     env_file:
@@ -59,15 +82,18 @@ services:
       DB_SERVER: sqlserver
       DB_PORT: 1433
       DB_NAME: ChatbotDB
+      DB_USER: sa
       DB_TRUSTED_CONNECTION: "false"
       DB_ENCRYPT: "no"
       DB_TRUST_SERVER_CERTIFICATE: "yes"
       DB_AUTO_CREATE: "true"
     depends_on:
-      - api
-      - sqlserver
+      api:
+        condition: service_healthy
+      sqlserver:
+        condition: service_healthy
     ports:
-      - "5000:5000"
+      - "${UI_HOST_PORT:-5000}:5000"
     volumes:
       - ./logs:/app/logs
     restart: unless-stopped

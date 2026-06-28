@@ -376,6 +376,19 @@ def fastapi_post(path, payload=None, timeout=30):
     return r.json() if r.content else {}
 
 
+def _fastapi_user_error(exc: Exception) -> str:
+    message = str(exc)
+    if "Connection refused" in message or "Failed to establish a new connection" in message:
+        return (
+            "API RAG chưa sẵn sàng (đang khởi động model trong Docker). "
+            "Chờ thêm vài phút, theo dõi `docker logs -f husc_api` đến khi startup xong, "
+            "rồi bấm 'Kết nối API' trước khi Rebuild."
+        )
+    if "Read timed out" in message or "timed out" in message.lower():
+        return "API phản hồi quá chậm — có thể đang rebuild/load model. Vui lòng thử lại sau."
+    return message
+
+
 # ============================================================
 # Routes
 # ============================================================
@@ -684,6 +697,12 @@ def chat():
 def connect_api():
     global gemini_ready
     try:
+        status = fastapi_status()
+        if status.get("error"):
+            raise ConnectionError(status["error"])
+        if not status.get("startup_complete", True):
+            raise ConnectionError("API đang khởi động model/RAG")
+
         fastapi_post("/connect_api", payload=None, timeout=30)
         gemini_ready = True
         session["gemini_ready"] = True
@@ -691,7 +710,7 @@ def connect_api():
     except Exception as e:
         gemini_ready = False
         session["gemini_ready"] = False
-        return jsonify({"success": False, "error": str(e)})
+        return jsonify({"success": False, "error": _fastapi_user_error(e)})
 
 
 @app.route("/disconnect_api", methods=["POST"])
@@ -712,10 +731,22 @@ def rebuild_db():
         return jsonify({"success": False, "error": "Unauthorized: Admin access required"}), 403
 
     try:
+        status = fastapi_status()
+        if status.get("error"):
+            return jsonify({"success": False, "error": _fastapi_user_error(Exception(status["error"]))})
+        if not status.get("startup_complete", True):
+            return jsonify({
+                "success": False,
+                "error": (
+                    "API đang khởi động model/RAG. "
+                    "Chờ `docker logs -f husc_api` báo startup xong rồi thử lại."
+                ),
+            })
+
         data = fastapi_post("/rebuild_db", payload=None, timeout=600)
         return jsonify(data)
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)})
+        return jsonify({"success": False, "error": _fastapi_user_error(e)})
 
 
 @app.route("/clear_chat", methods=["POST"])
@@ -780,7 +811,7 @@ if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
         port=5000,
-        debug=True,
+        debug=debug_mode,
         threaded=True,
         use_reloader=False,
     )

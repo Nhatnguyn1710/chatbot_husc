@@ -1,11 +1,15 @@
 import asyncio
 import os
+import threading
 import time
 
 from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel
 
 import rag_core
+
+_startup_complete = threading.Event()
+_startup_error: str | None = None
 
 # ==============================================================================
 # RATE LIMITER IMPORT
@@ -31,9 +35,31 @@ class ChatResponse(BaseModel):
     latency_ms: int
 
 
+def _run_startup() -> None:
+    global _startup_error
+    try:
+        rag_core.initialize_once(load_db=True)
+    except Exception as exc:
+        _startup_error = str(exc)
+    finally:
+        _startup_complete.set()
+
+
 @app.on_event("startup")
 def _startup() -> None:
-    rag_core.initialize_once(load_db=True)
+    threading.Thread(target=_run_startup, daemon=True, name="rag-startup").start()
+
+
+async def _ensure_startup(timeout: float = 900) -> None:
+    if not _startup_complete.is_set():
+        ok = await asyncio.to_thread(_startup_complete.wait, timeout)
+        if not ok:
+            raise HTTPException(
+                status_code=503,
+                detail="API đang khởi động model/RAG, vui lòng thử lại sau vài phút.",
+            )
+    if _startup_error:
+        raise HTTPException(status_code=503, detail=f"API khởi động thất bại: {_startup_error}")
 
 
 @app.get("/status")
@@ -65,6 +91,8 @@ def status():
         "pdf_path": pdf_path,
         "pdf_exists": os.path.exists(pdf_path),
         "source_counts": source_counts,
+        "startup_complete": _startup_complete.is_set(),
+        "startup_error": _startup_error,
     }
 
 
@@ -94,6 +122,7 @@ def cache_clear():
 
 @app.post("/connect_api")
 async def connect_api():
+    await _ensure_startup()
     ok = await asyncio.to_thread(rag_core.configure_gemini)
     if not ok:
         raise HTTPException(status_code=400, detail="Không thể kết nối Gemini. Kiểm tra GEMINI_API_KEY.")
@@ -108,7 +137,8 @@ def disconnect_api():
 
 @app.post("/rebuild_db")
 async def rebuild_db():
-    ok = await asyncio.to_thread(rag_core.build_database)
+    await _ensure_startup()
+    ok = await asyncio.to_thread(rag_core.rebuild_database)
     if ok:
         await asyncio.to_thread(rag_core.load_database)
         return {"success": True, "message": "✅ Đã rebuild database thành công!"}
@@ -137,6 +167,8 @@ async def chat(req: ChatRequest, request: Request):
                 detail=rate_result.message,
                 headers={"Retry-After": str(rate_result.retry_after or 60)}
             )
+
+    await _ensure_startup()
 
     start = time.perf_counter()
     reply = await asyncio.to_thread(rag_core.generate_answer, msg, req.recent_history or "")
